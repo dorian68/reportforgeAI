@@ -53,19 +53,19 @@ test("marketing site CTA targets are usable anchors or support links", () => {
   ];
 
   assert.equal(
-    ctas.every((href) => href.startsWith("?tab=") || href.startsWith("#") || href === "support.html"),
+    ctas.every((href) => href.startsWith("#") || href === "support.html"),
     true
   );
 });
 
-test("marketing site tab routes stay canonical for the split-view experience", () => {
+test("marketing site navigation targets canonical anchors", () => {
   assert.equal(
-    marketingSiteContent.tabs.every((tab) => tab.href.startsWith("?tab=") && tab.sections.length >= 2),
+    marketingSiteContent.tabs.every((tab) => tab.href.startsWith("#") && tab.sections.length >= 2),
     true
   );
 
   assert.equal(
-    marketingSiteContent.navigation.every((item) => item.href.startsWith("?tab=")),
+    marketingSiteContent.navigation.every((item) => item.href.startsWith("#")),
     true
   );
 });
@@ -84,9 +84,10 @@ test("marketing launch request no longer ships with a placeholder sales email", 
 test("marketing site can be server-rendered for prerendered output", () => {
   const markup = renderToStaticMarkup(React.createElement(MarketingSite));
 
-  assert.equal(markup.includes("Turn raw Excel ranges into dashboards, decks, and client-ready reporting assets."), true);
-  assert.equal(markup.includes("Request Launch Access"), true);
-  assert.equal(markup.includes("Overview"), true);
+  assert.equal(markup.includes("Excel in. Decision-ready reporting out."), true);
+  assert.equal(markup.includes("Request a Pilot"), true);
+  assert.equal(markup.includes("Workflow"), true);
+  assert.equal(markup.includes("Built for reporting quality, not just summary text."), true);
 });
 
 test("marketing site runtime config exposes sales email and lead endpoint overrides", () => {
@@ -113,8 +114,8 @@ test("lead capture helpers validate required fields and accept configured routes
   assert.equal(invalid.fullName, "Full name is required.");
   assert.equal(invalid.workEmail, "Enter a valid work email.");
   assert.equal(invalid.company, "Company is required.");
-  assert.equal(invalid.selectedPlan, "Choose a plan.");
-  assert.equal(invalid.useCase, "Choose a primary use case.");
+  assert.equal(invalid.selectedPlan, undefined);
+  assert.equal(invalid.useCase, undefined);
   assert.equal(hasConfiguredSalesEmail("sales@example.com"), true);
   assert.equal(hasConfiguredLeadEndpoint("/api/reportforge/site/lead"), true);
 });

@@ -33,23 +33,27 @@ Module._extensions[".ts"] = compileWithBabel;
 Module._extensions[".tsx"] = compileWithBabel;
 
 try {
-  const sitePath = path.resolve(__dirname, "..", "dist", "site.html");
-  if (!fs.existsSync(sitePath)) {
+  const sitePaths = ["index.html", "site.html"]
+    .map((fileName) => path.resolve(__dirname, "..", "dist", fileName))
+    .filter((filePath) => fs.existsSync(filePath));
+
+  if (sitePaths.length === 0) {
     process.exit(0);
   }
 
   const { MarketingSite } = require(path.resolve(__dirname, "..", "src", "site", "MarketingSite.tsx"));
-  const template = fs.readFileSync(sitePath, "utf8");
   const siteBaseUrl = normalizeBaseUrl(
     process.env.REPORTFORGE_BASE_URL || process.env.REPORTFORGE_PROD_URL || "",
     "https://localhost:3000/"
   );
   const siteMeta = buildMarketingSiteMeta(siteBaseUrl);
   const markup = renderToString(React.createElement(MarketingSite));
-  const hydratedTemplate = applySiteMetaTemplate(template, siteMeta);
-  const prerendered = hydratedTemplate.replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
-
-  fs.writeFileSync(sitePath, prerendered, "utf8");
+  for (const sitePath of sitePaths) {
+    const template = fs.readFileSync(sitePath, "utf8");
+    const hydratedTemplate = applySiteMetaTemplate(template, siteMeta);
+    const prerendered = hydratedTemplate.replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
+    fs.writeFileSync(sitePath, prerendered, "utf8");
+  }
 } finally {
   Module._extensions[".ts"] = originalTs;
   Module._extensions[".tsx"] = originalTsx;

@@ -17,7 +17,7 @@ function normalizeBaseUrl(url, fallbackUrl = "https://localhost:3000/") {
 
 function buildMarketingSiteMeta(baseUrl) {
   const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  const canonicalUrl = new URL("site.html", normalizedBaseUrl).toString();
+  const canonicalUrl = normalizedBaseUrl;
   const ogImageUrl = new URL("assets/reportforge-store-banner-01.png", normalizedBaseUrl).toString();
 
   return {
@@ -25,7 +25,7 @@ function buildMarketingSiteMeta(baseUrl) {
     description: marketingSiteDescription,
     canonicalUrl,
     ogImageUrl,
-    themeColor: "#15736b",
+    themeColor: "#0b1016",
     structuredData: JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",

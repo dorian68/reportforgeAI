@@ -84,14 +84,6 @@ export function validateLaunchRequest(form: LaunchRequestState): LaunchRequestEr
     errors.company = "Company is required.";
   }
 
-  if (!normalizeValue(form.selectedPlan)) {
-    errors.selectedPlan = "Choose a plan.";
-  }
-
-  if (!normalizeValue(form.useCase)) {
-    errors.useCase = "Choose a primary use case.";
-  }
-
   return errors;
 }
 

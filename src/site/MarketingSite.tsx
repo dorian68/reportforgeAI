@@ -1,6 +1,6 @@
 import React, { type MouseEvent, type ReactNode, useEffect, useState } from "react";
 
-import { marketingSiteContent, type MarketingTabId } from "./content";
+import { marketingSiteContent } from "./content";
 import {
   buildLaunchBrief,
   buildLaunchRequestPayload,
@@ -52,33 +52,12 @@ const defaultLaunchRequestState: LaunchRequestState = {
   notes: "",
 };
 
-const defaultSiteTab: MarketingTabId = "overview";
-
-const sectionToTabMap: Record<string, MarketingTabId> = {
-  top: "overview",
-  product: "overview",
-  "before-after": "overview",
-  outputs: "product",
-  screens: "product",
-  "store-assets": "product",
-  security: "product",
-  personas: "buyers",
-  "use-cases": "buyers",
-  comparison: "buyers",
-  pricing: "pricing",
-  "launch-request": "pricing",
-  faq: "pricing",
-  closing: "pricing",
-};
-
 type SiteRoute = {
-  tab: MarketingTabId;
   anchor?: string;
 };
 
-const defaultPrerenderRoute: SiteRoute = {
-  tab: defaultSiteTab,
-};
+const defaultPrerenderRoute: SiteRoute = {};
+const trackedSiteSections = ["top", "workflow", "outputs", "buyers", "pricing", "faq", "launch-request"] as const;
 
 type SiteLinkProps = {
   href: string;
@@ -88,17 +67,9 @@ type SiteLinkProps = {
   ariaCurrent?: "page";
 };
 
-function isMarketingTabId(value: string | null | undefined): value is MarketingTabId {
-  return marketingSiteContent.tabs.some((tab) => tab.id === value);
-}
-
 function normalizeAnchor(value: string | null | undefined) {
   const normalized = (value ?? "").replace(/^#/, "").trim();
   return normalized.length > 0 ? normalized : undefined;
-}
-
-function resolveTabFromAnchor(anchor?: string) {
-  return (anchor ? sectionToTabMap[anchor] : undefined) ?? defaultSiteTab;
 }
 
 function parseSiteRouteFromHref(href: string): SiteRoute | null {
@@ -106,30 +77,15 @@ function parseSiteRouteFromHref(href: string): SiteRoute | null {
     return null;
   }
 
-  if (href.startsWith("?")) {
-    const url = new URL(href, "https://reportforge.local/site.html");
-    const anchor = normalizeAnchor(url.hash);
-    const queryTab = url.searchParams.get("tab");
-
-    return {
-      tab: isMarketingTabId(queryTab) ? queryTab : resolveTabFromAnchor(anchor),
-      anchor,
-    };
-  }
-
   if (href.startsWith("#")) {
-    const anchor = normalizeAnchor(href);
-    return {
-      tab: resolveTabFromAnchor(anchor),
-      anchor,
-    };
+    return { anchor: normalizeAnchor(href) };
   }
 
   return null;
 }
 
 function buildSiteHref(route: SiteRoute) {
-  return `?tab=${route.tab}${route.anchor ? `#${route.anchor}` : ""}`;
+  return route.anchor ? `#${route.anchor}` : "#top";
 }
 
 function readSiteRouteFromWindow(): SiteRoute {
@@ -137,14 +93,7 @@ function readSiteRouteFromWindow(): SiteRoute {
     return defaultPrerenderRoute;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  const queryTab = params.get("tab");
-  const anchor = normalizeAnchor(window.location.hash);
-
-  return {
-    tab: isMarketingTabId(queryTab) ? queryTab : resolveTabFromAnchor(anchor),
-    anchor,
-  };
+  return { anchor: normalizeAnchor(window.location.hash) };
 }
 
 function readCaptureModeFromWindow(): string | null {
@@ -511,17 +460,17 @@ function HeroShowcase() {
     {
       code: "01",
       title: "Source range locked",
-      detail: "The operating layer starts from the exact worksheet selection teams already trust.",
+      detail: "Start from the exact worksheet range the team is already using in the real review cycle.",
     },
     {
       code: "02",
-      title: "Story brief governed",
-      detail: "Audience, decision, KPI hierarchy, and output tone stay aligned across channels.",
+      title: "Story brief aligned",
+      detail: "Audience, decision, KPI hierarchy, and tone stay consistent before outputs start branching.",
     },
     {
       code: "03",
       title: "Decision surfaces issued",
-      detail: "Dashboards, decks, web apps, and executive summaries ship from the same plan.",
+      detail: "Dashboards, decks, web apps, and executive summaries all ship from the same reporting plan.",
     },
   ];
 
@@ -529,11 +478,11 @@ function HeroShowcase() {
     <div className="rf-site-command">
       <div className="rf-site-command__frame">
         <div className="rf-site-command__heading">
-          <span className="rf-site-command__eyebrow">Reporting operating layer</span>
+          <span className="rf-site-command__eyebrow">Excel to reporting system</span>
           <strong>From spreadsheet range to finished decision surface.</strong>
           <p>
-            ReportForge does not just rewrite notes. It structures the reporting sequence, holds the
-            narrative brief, and outputs buyer-ready surfaces with consistent message control.
+            ReportForge does more than rewrite notes. It keeps the reporting brief intact, shapes the
+            story once, and produces outputs that read like finished software-backed reporting.
           </p>
         </div>
         <div className="rf-site-command__track">
@@ -565,12 +514,12 @@ function HeroShowcase() {
           <article className="rf-site-command__rail-card">
             <span>Dashboard output</span>
             <strong>Premium reporting surface for managers and operating reviews.</strong>
-            <p>KPI hierarchy, comparison, and actions sit in a deliberate reporting layout.</p>
+            <p>KPI hierarchy, comparison, and actions sit in a reporting layout that feels deliberate.</p>
           </article>
           <article className="rf-site-command__rail-card">
             <span>Web app output</span>
             <strong>Shareable delivery without waiting on a BI program.</strong>
-            <p>Useful when a team needs something productized faster than a dashboard rebuild.</p>
+            <p>Useful when a team needs something shareable and productized faster than a dashboard rebuild.</p>
           </article>
         </div>
       </div>
@@ -581,20 +530,20 @@ function HeroShowcase() {
 function PositioningBand() {
   const items = [
     {
-      label: "Excel-first wedge",
+      label: "Excel-native",
       title: "Start where the numbers are already trusted.",
       detail:
-        "ReportForge begins with the spreadsheet selection instead of forcing a new BI model or a separate reporting stack.",
+        "ReportForge begins with the spreadsheet selection instead of forcing a new BI model or a new reporting stack.",
     },
     {
-      label: "Story control",
-      title: "One brief governs every output.",
+      label: "Story planning",
+      title: "One reporting brief governs every output.",
       detail:
         "The same planning layer shapes dashboards, decks, Apps Script web apps, and executive summaries.",
     },
     {
-      label: "Premium finish",
-      title: "The result reads like decision infrastructure.",
+      label: "Decision-ready",
+      title: "The result reads like finished reporting, not stitched exports.",
       detail:
         "Teams get outputs that feel board-ready, client-ready, and operationally credible without hand-building every surface.",
     },
@@ -662,7 +611,7 @@ function OverviewTabContent() {
 
   return (
     <>
-      <section className="rf-site-section" id="product">
+      <section className="rf-site-section" id="workflow">
         <div className="rf-site-shell rf-site-shell--narrow">
           <div className="rf-site-sequence">
             <div className="rf-site-sequence__intro">
@@ -792,7 +741,7 @@ function BuyersTabContent() {
 
   return (
     <>
-      <section className="rf-site-section rf-site-section--muted" id="personas">
+      <section className="rf-site-section rf-site-section--muted" id="buyers">
         <div className="rf-site-shell rf-site-shell--narrow">
           <SectionHeader
             eyebrow={content.personas.eyebrow}
@@ -937,27 +886,27 @@ function getPlanRoute(selectedPlan: string) {
   switch (selectedPlan) {
     case "Starter":
       return {
-        label: "Self-serve wedge",
+        label: "Fast proof",
         detail:
-          "Lead with Microsoft Store install, first workbook success, and upgrade when the buyer needs recurring exports.",
+          "Use Starter to prove the Excel-to-output motion on one workbook before asking the team to change habits.",
       };
     case "Pro":
       return {
-        label: "Analyst-to-team expansion",
+        label: "Single-operator scale",
         detail:
-          "Position Pro as the fastest path for consultants, analysts, and operators who need polished reporting every week.",
+          "Pro fits analysts, consultants, and operators who need polished reporting every week without a wider rollout yet.",
       };
     case "Enterprise":
       return {
-        label: "Sales-led rollout",
+        label: "Governed rollout",
         detail:
-          "Push security review, managed AI, deployment support, and a pilot-to-rollout motion anchored in Microsoft 365.",
+          "Enterprise is the path when procurement, Microsoft 365 deployment, or managed AI controls are part of the deal.",
       };
     default:
       return {
-        label: "Guided team pilot",
+        label: "Team pilot",
         detail:
-          "Use recurring management reporting as the wedge, then standardize templates and reporting cadence across the function.",
+          "Team works best when one recurring review already exists and the buyer wants to standardize it across a function.",
       };
   }
 }
@@ -990,7 +939,7 @@ function LeadCapturePanel() {
   async function handleCopyBrief() {
     try {
       await navigator.clipboard.writeText(brief);
-      setStatus("Launch brief copied. You can paste it into email, CRM, or your outbound workflow.");
+      setStatus("Pilot brief copied. You can drop it into email, CRM, or your internal handoff flow.");
     } catch {
       setStatus("Copy failed in this browser. Use the download action instead.");
     }
@@ -1004,7 +953,7 @@ function LeadCapturePanel() {
     link.download = "reportforge-launch-request.txt";
     link.click();
     URL.revokeObjectURL(objectUrl);
-    setStatus("Launch brief downloaded.");
+    setStatus("Pilot brief downloaded.");
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -1014,13 +963,13 @@ function LeadCapturePanel() {
     const nextErrors = validateLaunchRequest(form);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
-      setStatus("Complete the required fields before submitting the launch request.");
+      setStatus("Complete the key contact fields so we can reply with the right pilot path.");
       return;
     }
 
     if (!leadEndpointConfigured) {
       setStatus(
-        "Live launch capture is not configured for this deployment yet. Use copy, download, or the sales email fallback."
+        "Live form submission is not configured on this deployment yet. Use copy, download, or the sales email fallback."
       );
       return;
     }
@@ -1040,7 +989,7 @@ function LeadCapturePanel() {
       setStatus(
         error instanceof Error
           ? error.message
-          : "Launch request submission failed. Use the sales email or brief download fallback."
+          : "Pilot request submission failed. Use the sales email or brief download fallback."
       );
     } finally {
       setIsSubmitting(false);
@@ -1107,12 +1056,22 @@ function LeadCapturePanel() {
               ))}
             </select>
           </label>
+        </div>
+        <label>
+          <span>Notes</span>
+          <textarea
+            name="notes"
+            value={form.notes}
+            onChange={(event) => updateField("notes", event.target.value)}
+            placeholder="What review is painful today? Which audience matters most? What has to ship faster?"
+            rows={5}
+          />
+        </label>
+        <div className="rf-site-launch__meta">
           <label>
-            <span>Plan</span>
+            <span>Preferred plan</span>
             <select
-              aria-invalid={Boolean(errors.selectedPlan)}
               name="selectedPlan"
-              required={true}
               value={form.selectedPlan}
               onChange={(event) => updateField("selectedPlan", event.target.value)}
             >
@@ -1122,16 +1081,11 @@ function LeadCapturePanel() {
                 </option>
               ))}
             </select>
-            {errors.selectedPlan ? (
-              <small className="rf-site-launch__error">{errors.selectedPlan}</small>
-            ) : null}
           </label>
           <label>
             <span>Primary use case</span>
             <select
-              aria-invalid={Boolean(errors.useCase)}
               name="useCase"
-              required={true}
               value={form.useCase}
               onChange={(event) => updateField("useCase", event.target.value)}
             >
@@ -1141,32 +1095,21 @@ function LeadCapturePanel() {
                 </option>
               ))}
             </select>
-            {errors.useCase ? <small className="rf-site-launch__error">{errors.useCase}</small> : null}
           </label>
         </div>
-        <label>
-          <span>Notes</span>
-          <textarea
-            name="notes"
-            value={form.notes}
-            onChange={(event) => updateField("notes", event.target.value)}
-            placeholder="What decision should the report support? Which KPI or audience matters most?"
-            rows={5}
-          />
-        </label>
         <div className="rf-site-launch__actions">
           <button type="submit" disabled={isSubmitting || !leadEndpointConfigured}>
-            {isSubmitting ? "Submitting..." : "Submit Launch Request"}
+            {isSubmitting ? "Submitting..." : "Request Pilot"}
           </button>
           <button type="button" onClick={handleCopyBrief}>
-            Copy launch brief
+            Copy brief
           </button>
           <button type="button" className="is-secondary" onClick={handleDownloadBrief}>
             Download brief
           </button>
           {salesEmailConfigured ? (
             <a className="rf-site-button rf-site-button--primary" href={salesMailto}>
-              Open sales email
+              Email sales
             </a>
           ) : (
             <div className="rf-site-launch__hint">{marketingSiteContent.leadCapture.note}</div>
@@ -1186,11 +1129,11 @@ function LeadCapturePanel() {
       <aside className="rf-site-launch__summary">
         <div className="rf-site-launch__route">
           <span>{route.label}</span>
-          <strong>{form.selectedPlan} motion</strong>
+          <strong>{form.selectedPlan} pilot motion</strong>
           <p>{route.detail}</p>
         </div>
         <div className="rf-site-launch__preview">
-          <strong>Lead brief preview</strong>
+          <strong>Pilot brief preview</strong>
           <pre>{brief}</pre>
         </div>
       </aside>
@@ -1243,6 +1186,7 @@ export function MarketingSite() {
   const content = marketingSiteContent;
   const [captureMode, setCaptureMode] = useState<string | null>(null);
   const [route, setRoute] = useState<SiteRoute>(defaultPrerenderRoute);
+  const [activeSection, setActiveSection] = useState("top");
 
   useEffect(() => {
     function syncRoute() {
@@ -1266,24 +1210,61 @@ export function MarketingSite() {
       return;
     }
 
+    const activeAnchor = route.anchor;
+
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const frame = window.requestAnimationFrame(() => {
-      const target = document.getElementById(route.anchor ?? "");
+      const target = document.getElementById(activeAnchor);
 
       if (target) {
         target.scrollIntoView({
           behavior: prefersReducedMotion ? "auto" : "smooth",
           block: "start",
         });
+        setActiveSection(activeAnchor);
       }
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [route.anchor, route.tab]);
+  }, [route.anchor]);
+
+  useEffect(() => {
+    if (captureMode || typeof window === "undefined" || typeof IntersectionObserver !== "function") {
+      return;
+    }
+
+    const sections = trackedSiteSections
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
+
+        if (visibleSections[0]?.target.id) {
+          setActiveSection(visibleSections[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-18% 0px -55% 0px",
+        threshold: [0.2, 0.45, 0.7],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [captureMode]);
 
   function navigateTo(href: string) {
     const nextRoute = parseSiteRouteFromHref(href);
@@ -1296,29 +1277,6 @@ export function MarketingSite() {
     const nextHref = buildSiteHref(nextRoute);
     window.history.pushState({}, "", nextHref);
     setRoute(nextRoute);
-
-    if (!nextRoute.anchor) {
-      const prefersReducedMotion =
-        typeof window.matchMedia === "function" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-    }
-  }
-
-  const activeTab = content.tabs.find((tab) => tab.id === route.tab) ?? content.tabs[0];
-
-  function renderActiveTabContent() {
-    switch (activeTab.id) {
-      case "product":
-        return <ProductTabContent />;
-      case "buyers":
-        return <BuyersTabContent />;
-      case "pricing":
-        return <PricingTabContent onNavigate={navigateTo} />;
-      case "overview":
-      default:
-        return <OverviewTabContent />;
-    }
   }
 
   if (captureMode) {
@@ -1331,7 +1289,7 @@ export function MarketingSite() {
       <header className="rf-site-hero">
         <div className="rf-site-shell">
           <nav className="rf-site-nav">
-            <SiteLink className="rf-site-brand" href="?tab=overview#top" onNavigate={navigateTo}>
+            <SiteLink className="rf-site-brand" href="#top" onNavigate={navigateTo}>
               <img src="assets/reportforge-mark.svg" alt="" aria-hidden="true" />
               <div>
                 <strong>{content.brand.name}</strong>
@@ -1339,15 +1297,17 @@ export function MarketingSite() {
               </div>
             </SiteLink>
             <div className="rf-site-nav__links">
-              {content.tabs.map((tab) => (
+              {content.navigation.map((item) => (
                 <SiteLink
-                  key={tab.id}
-                  className={`rf-site-nav__tab ${tab.id === activeTab.id ? "is-active" : ""}`.trim()}
-                  href={tab.href}
+                  key={item.href}
+                  className={`rf-site-nav__tab ${
+                    activeSection === parseSiteRouteFromHref(item.href)?.anchor ? "is-active" : ""
+                  }`.trim()}
+                  href={item.href}
                   onNavigate={navigateTo}
-                  ariaCurrent={tab.id === activeTab.id ? "page" : undefined}
+                  ariaCurrent={activeSection === parseSiteRouteFromHref(item.href)?.anchor ? "page" : undefined}
                 >
-                  {tab.label}
+                  {item.label}
                 </SiteLink>
               ))}
             </div>
@@ -1385,42 +1345,17 @@ export function MarketingSite() {
 
       <main className="rf-site-main">
         <PositioningBand />
-        <section className="rf-site-tab-shell">
-          <div className="rf-site-shell">
-            <div className="rf-site-tab-panel">
-              <div className="rf-site-tab-panel__header">
-                <div className="rf-site-tab-panel__copy">
-                  <p className="rf-site-section__eyebrow">{activeTab.eyebrow}</p>
-                  <h2>{activeTab.title}</h2>
-                  <p className="rf-site-section__summary">{activeTab.summary}</p>
-                </div>
-                <div className="rf-site-tab-panel__links">
-                  {activeTab.sections.map((item) => (
-                    <SiteLink
-                      key={item.href}
-                      className={`rf-site-tab-panel__chip ${
-                        route.anchor === parseSiteRouteFromHref(item.href)?.anchor ? "is-active" : ""
-                      }`.trim()}
-                      href={item.href}
-                      onNavigate={navigateTo}
-                    >
-                      {item.label}
-                    </SiteLink>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {renderActiveTabContent()}
+        <OverviewTabContent />
+        <ProductTabContent />
+        <BuyersTabContent />
+        <PricingTabContent onNavigate={navigateTo} />
       </main>
 
       <footer className="rf-site-footer">
         <div className="rf-site-shell rf-site-footer__inner">
           <div>
             <strong>{content.brand.name}</strong>
-            <p>Excel-native reporting copilot for faster decks, dashboards, and client deliverables.</p>
+            <p>Excel-native reporting software for teams that need cleaner dashboards, decks, and decision packs from real workbook data.</p>
           </div>
           <div className="rf-site-footer__links">
             {content.navigation.map((item) => (

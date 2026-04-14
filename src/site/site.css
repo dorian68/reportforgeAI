@@ -3009,6 +3009,12 @@ a {
   gap: 18px;
 }
 
+.rf-site-launch__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .rf-site-launch__form,
 .rf-site-launch__summary {
   padding: 24px;
@@ -3254,6 +3260,7 @@ code {
   .rf-site-closing__actions,
   .rf-site-launch__actions,
   .rf-site-launch__grid,
+  .rf-site-launch__meta,
   .rf-site-pricing-card__head,
   .rf-site-pricing-card__price {
     display: grid;

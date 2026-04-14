@@ -102,85 +102,83 @@ export const marketingSiteContent = {
   tabs: [
     {
       id: "overview",
-      label: "Overview",
-      href: "?tab=overview#product",
-      eyebrow: "Landing page overview",
-      title: "Start with the commercial story, not the whole stack at once.",
+      label: "Workflow",
+      href: "#workflow",
+      eyebrow: "Operating flow",
+      title: "Show how the product moves from spreadsheet selection to finished reporting.",
       summary:
-        "This view frames the wedge, the workflow, and the before-versus-after narrative so buyers understand the product in one pass.",
+        "Lead with the operating flow first so buyers understand why ReportForge lands faster than a BI rebuild.",
       sections: [
-        { label: "Workflow", href: "?tab=overview#product" },
-        { label: "Before / after", href: "?tab=overview#before-after" },
+        { label: "Workflow", href: "#workflow" },
+        { label: "Before / after", href: "#before-after" },
       ],
     },
     {
       id: "product",
-      label: "Product",
-      href: "?tab=product#outputs",
-      eyebrow: "Product surfaces",
-      title: "Show the outputs, the screens, and the packaging buyers actually evaluate.",
+      label: "Outputs",
+      href: "#outputs",
+      eyebrow: "Finished outputs",
+      title: "Show buyers the reporting surfaces they actually pay for.",
       summary:
-        "This view focuses on the deliverables, the premium surfaces, and the operational controls that make the product feel credible.",
+        "Dashboards, decks, web apps, and export paths should look productized, not like placeholders around a prompt.",
       sections: [
-        { label: "Outputs", href: "?tab=product#outputs" },
-        { label: "Screens", href: "?tab=product#screens" },
-        { label: "Store assets", href: "?tab=product#store-assets" },
-        { label: "Security", href: "?tab=product#security" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Screens", href: "#screens" },
+        { label: "Store assets", href: "#store-assets" },
+        { label: "Security", href: "#security" },
       ],
     },
     {
       id: "buyers",
       label: "Buyers",
-      href: "?tab=buyers#personas",
+      href: "#buyers",
       eyebrow: "Commercial fit",
-      title: "Map the product to the teams, motions, and objections that drive adoption.",
+      title: "Map ReportForge to the teams that still run important reporting through Excel.",
       summary:
-        "This view is where the buyer sees their role, their workflow, and the reason ReportForge wins over manual reporting or generic AI.",
+        "Make it obvious who buys, where it lands first, and why it beats manual reporting or generic AI tooling.",
       sections: [
-        { label: "Personas", href: "?tab=buyers#personas" },
-        { label: "Use cases", href: "?tab=buyers#use-cases" },
-        { label: "Comparison", href: "?tab=buyers#comparison" },
+        { label: "Personas", href: "#buyers" },
+        { label: "Use cases", href: "#use-cases" },
+        { label: "Comparison", href: "#comparison" },
       ],
     },
     {
       id: "pricing",
       label: "Pricing",
-      href: "?tab=pricing#pricing",
-      eyebrow: "Commercial close",
-      title: "Package the rollout clearly and give the buyer a clean next step.",
+      href: "#pricing",
+      eyebrow: "Commercial model",
+      title: "Make the next step obvious without forcing a heavy sales motion.",
       summary:
-        "This view carries the plan packaging, the launch request, the FAQ, and the close so the site works as a real pipeline entry point.",
+        "The site should move from proof to pilot clearly: pricing, launch request, objections, then close.",
       sections: [
-        { label: "Pricing", href: "?tab=pricing#pricing" },
-        { label: "Launch", href: "?tab=pricing#launch-request" },
-        { label: "FAQ", href: "?tab=pricing#faq" },
-        { label: "Close", href: "?tab=pricing#closing" },
+        { label: "Pricing", href: "#pricing" },
+        { label: "Launch", href: "#launch-request" },
+        { label: "FAQ", href: "#faq" },
+        { label: "Close", href: "#closing" },
       ],
     },
   ] satisfies MarketingTab[],
   navigation: [
-    { label: "Product", href: "?tab=overview#product" },
-    { label: "Before / After", href: "?tab=overview#before-after" },
-    { label: "Outputs", href: "?tab=product#outputs" },
-    { label: "Screens", href: "?tab=product#screens" },
-    { label: "Use Cases", href: "?tab=buyers#use-cases" },
-    { label: "Pricing", href: "?tab=pricing#pricing" },
-    { label: "Launch", href: "?tab=pricing#launch-request" },
-    { label: "FAQ", href: "?tab=pricing#faq" },
+    { label: "Workflow", href: "#workflow" },
+    { label: "Outputs", href: "#outputs" },
+    { label: "Buyers", href: "#buyers" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Launch", href: "#launch-request" },
   ] satisfies MarketingNavItem[],
   hero: {
-    eyebrow: "Excel-native reporting, built for commercial rollout",
-    title: "Turn raw Excel ranges into dashboards, decks, and client-ready reporting assets.",
+    eyebrow: "Reporting software for Excel-heavy teams",
+    title: "Excel in. Decision-ready reporting out.",
     subtitle:
-      "ReportForge AI gives Excel-heavy teams a faster path from spreadsheet selection to decision-ready reporting, without waiting for a BI project or hand-building every slide.",
+      "ReportForge turns workbook selections into polished dashboards, decks, web apps, and executive summaries without forcing a BI rebuild or rebuilding every review pack by hand.",
     primaryCta: {
-      label: "Request Launch Access",
-      href: "?tab=pricing#launch-request",
+      label: "Request a Pilot",
+      href: "#launch-request",
       tone: "primary",
     } satisfies MarketingCta,
     secondaryCta: {
-      label: "See Launch Pricing",
-      href: "?tab=pricing#pricing",
+      label: "See the Outputs",
+      href: "#outputs",
       tone: "secondary",
     } satisfies MarketingCta,
     tertiaryCta: {
@@ -191,32 +189,32 @@ export const marketingSiteContent = {
   },
   signals: [
     {
-      label: "Time to value",
-      value: "Under 5 minutes",
-      detail: "Designed for a first usable reporting output from a real workbook in one session.",
+      label: "Source",
+      value: "Native Excel selection",
+      detail: "The workflow starts inside the spreadsheet your team already trusts.",
     },
     {
-      label: "Output surface",
-      value: "Slides, HTML, GAS, email",
-      detail: "One report brief powers multiple deliverables instead of restarting in every tool.",
-    },
-    {
-      label: "Control model",
-      value: "AI optional",
-      detail: "Deterministic generation stays available even when AI is disabled or unavailable.",
-    },
-    {
-      label: "Adoption wedge",
-      value: "Excel-first",
+      label: "Outputs",
+      value: "Decks, dashboards, web apps",
       detail:
-        "The workflow starts where analysts already work instead of forcing a new reporting stack.",
+        "One reporting brief drives every delivery format instead of restarting in each tool.",
+    },
+    {
+      label: "Control",
+      value: "Deterministic + AI",
+      detail: "Teams can keep a governed path even when AI is restricted or unavailable.",
+    },
+    {
+      label: "Rollout",
+      value: "Pilot-friendly",
+      detail: "A team can prove value on one workbook before standardizing the motion.",
     },
   ] satisfies MarketingSignal[],
   workflow: {
-    eyebrow: "Why it converts",
-    title: "A reporting workflow people can adopt without retraining the company.",
+    eyebrow: "How it works",
+    title: "The reporting layer sits on top of the spreadsheet the team already uses.",
     summary:
-      "The product-led wedge is simple: start from the Excel file you already trust, collect just enough context, generate multiple outputs, then standardize the best ones.",
+      "Select the range, capture the reporting brief, shape the story once, then issue the outputs that managers, execs, clients, and operators actually consume.",
     steps: [
       {
         title: "Select the Excel range",
@@ -240,8 +238,8 @@ export const marketingSiteContent = {
     ] satisfies WorkflowStep[],
   },
   beforeAfter: {
-    eyebrow: "Why buyers switch",
-    title: "ReportForge sits between spreadsheet chaos and heavyweight BI.",
+    eyebrow: "Why teams switch",
+    title: "Faster than rebuilding packs manually. Sharper than prompting a generic model.",
     before: [
       "Analysts build the same weekly or monthly pack from scratch in Excel and PowerPoint.",
       "Generic AI tools rewrite text but keep the structure repetitive and lightweight.",
@@ -256,8 +254,8 @@ export const marketingSiteContent = {
     ],
   },
   outputs: {
-    eyebrow: "What buyers get",
-    title: "One reporting engine, multiple surfaces.",
+    eyebrow: "What ships",
+    title: "One source selection. Multiple finished reporting surfaces.",
     items: [
       {
         title: "Workbook Report",
@@ -294,8 +292,8 @@ export const marketingSiteContent = {
     ] satisfies OutputChannel[],
   },
   personas: {
-    eyebrow: "Who buys",
-    title: "Different teams buy it for different reasons.",
+    eyebrow: "Who it is for",
+    title: "Bought by teams that still run important reporting through Excel.",
     items: [
       {
         title: "Sales leadership",
@@ -367,7 +365,7 @@ export const marketingSiteContent = {
   },
   useCases: {
     eyebrow: "Use cases",
-    title: "The commercial story gets stronger when buyers see themselves in the workflow.",
+    title: "The strongest entry points are recurring reviews, not abstract AI experiments.",
     items: [
       {
         title: "Monthly executive review",
@@ -424,7 +422,7 @@ export const marketingSiteContent = {
   },
   comparison: {
     eyebrow: "Why it wins",
-    title: "Not just another summary generator.",
+    title: "Built for reporting quality, not just summary text.",
     rows: [
       {
         capability: "Starting point",
@@ -459,8 +457,8 @@ export const marketingSiteContent = {
     ] satisfies ComparisonRow[],
   },
   storeShots: {
-    eyebrow: "Microsoft Store ready",
-    title: "Merchandising assets you can reuse in the listing, in outbound, and in demos.",
+    eyebrow: "Store and sales assets",
+    title: "Reusable product surfaces for Microsoft Store, outbound, and live demos.",
     items: [
       {
         label: "Screenshot 01",
@@ -485,8 +483,8 @@ export const marketingSiteContent = {
     ] satisfies StoreShot[],
   },
   pricing: {
-    eyebrow: "Launch pricing",
-    title: "Package the wedge for self-serve, then expand into teams.",
+    eyebrow: "Pricing",
+    title: "Start with a pilot. Expand when the reporting motion sticks.",
     tiers: [
       {
         name: "Starter",
@@ -503,7 +501,7 @@ export const marketingSiteContent = {
         ],
         cta: {
           label: "Start With Starter",
-          href: "?tab=pricing#launch-request",
+          href: "#launch-request",
           tone: "secondary",
         },
       },
@@ -519,7 +517,7 @@ export const marketingSiteContent = {
           "AI enhancement with OpenAI-compatible providers",
           "Saved reporting templates and stronger export workflow",
         ],
-        cta: { label: "Choose Pro", href: "?tab=pricing#launch-request", tone: "primary" },
+        cta: { label: "Choose Pro", href: "#launch-request", tone: "primary" },
       },
       {
         name: "Team",
@@ -535,7 +533,7 @@ export const marketingSiteContent = {
           "Brand and template alignment support",
           "Priority onboarding for recurring management reporting",
         ],
-        cta: { label: "Launch Team Plan", href: "?tab=pricing#launch-request", tone: "primary" },
+        cta: { label: "Launch Team Plan", href: "#launch-request", tone: "primary" },
       },
       {
         name: "Enterprise",
@@ -550,15 +548,15 @@ export const marketingSiteContent = {
           "Private deployment guidance for Google-connected outputs",
           "Pilot-to-rollout commercialization support",
         ],
-        cta: { label: "Discuss Enterprise", href: "?tab=pricing#launch-request", tone: "ghost" },
+        cta: { label: "Discuss Enterprise", href: "#launch-request", tone: "ghost" },
       },
     ] satisfies PricingTier[],
   },
   leadCapture: {
-    eyebrow: "Launch request",
-    title: "Turn the site into a pipeline entry point.",
+    eyebrow: "Request a pilot",
+    title: "Tell us where reporting is breaking today.",
     summary:
-      "This section is built for launch-day conversion: self-serve buyers can identify their plan quickly, while team and enterprise leads can hand over a structured brief without waiting for a custom sales form.",
+      "We only need enough context to route the conversation well. Start with the essentials and add reporting detail if you want us to tailor the pilot.",
     salesEmail: siteRuntimeConfig.salesEmail,
     teamSizes: ["1", "2-5", "6-20", "21-50", "50+"],
     note: "Set REPORTFORGE_SITE_LEAD_ENDPOINT for live lead capture and REPORTFORGE_SALES_EMAIL for direct mail routing.",
@@ -600,13 +598,13 @@ export const marketingSiteContent = {
     ] satisfies FaqItem[],
   },
   closing: {
-    eyebrow: "Commercial close",
-    title: "Launch with one workbook. Expand into a reporting standard.",
+    eyebrow: "Next step",
+    title: "Prove it on one workbook. Standardize it across the team.",
     summary:
-      "Use the free or Pro motion to land individual teams, then expand through recurring management reporting, premium exports, and managed deployment support.",
+      "The fastest path is still simple: start from one real workbook, prove the reporting lift, then expand into recurring management reporting and governed deployment.",
     primaryCta: {
-      label: "Submit Launch Request",
-      href: "?tab=pricing#launch-request",
+      label: "Request a Pilot",
+      href: "#launch-request",
       tone: "primary",
     } satisfies MarketingCta,
     secondaryCta: {

@@ -362,6 +362,12 @@ module.exports = async (env, options) => {
         chunks: ["polyfill", "taskpane"],
       }),
       new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: "./src/site/site.html",
+        chunks: ["polyfill", "site"],
+        siteMeta: marketingSiteMeta,
+      }),
+      new HtmlWebpackPlugin({
         filename: "site.html",
         template: "./src/site/site.html",
         chunks: ["polyfill", "site"],
