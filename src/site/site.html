@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= htmlWebpackPlugin.options.siteMeta.title %></title>
+    <meta
+      name="description"
+      content="<%= htmlWebpackPlugin.options.siteMeta.description %>"
+    />
+    <meta name="theme-color" content="<%= htmlWebpackPlugin.options.siteMeta.themeColor %>" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.siteMeta.canonicalUrl %>" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.siteMeta.title %>" />
+    <meta
+      property="og:description"
+      content="<%= htmlWebpackPlugin.options.siteMeta.description %>"
+    />
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.siteMeta.canonicalUrl %>" />
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.siteMeta.ogImageUrl %>" />
+    <meta property="og:site_name" content="ReportForge AI" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.siteMeta.title %>" />
+    <meta
+      name="twitter:description"
+      content="<%= htmlWebpackPlugin.options.siteMeta.description %>"
+    />
+    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.siteMeta.ogImageUrl %>" />
+    <script type="application/ld+json">
+      <%= htmlWebpackPlugin.options.siteMeta.structuredData %>
+    </script>
+    <link href="site.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

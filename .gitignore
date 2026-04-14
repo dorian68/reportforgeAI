@@ -1,0 +1,8 @@
+.env
+.env.local
+config/cdp.json
+config/google-oauth.client.json
+dist/
+.test-dist/
+node_modules/
+*.log

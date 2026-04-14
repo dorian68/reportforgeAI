@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "ignorePatterns": [
+    "dist/**",
+    ".test-dist/**",
+    "src/vendor/pptxgen.browser.js"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ],
+  "plugins": [
+    "office-addins"
+  ],
+  "extends": [
+    "plugin:office-addins/recommended"
+  ]
+}

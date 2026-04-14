@@ -1,0 +1,25 @@
+{
+  "source": {
+    "kind": "dataset",
+    "dataset": {
+      "sourceLabel": "Revenue Performance Demo",
+      "headers": ["Month", "Region", "Revenue", "Cost", "MarginPct"],
+      "rows": [
+        ["2026-01", "North", 125000, 83000, 33.6],
+        ["2026-02", "North", 132500, 87000, 34.3],
+        ["2026-01", "South", 117200, 79900, 31.8],
+        ["2026-02", "South", 121900, 81250, 33.3]
+      ]
+    }
+  },
+  "context": {
+    "prompt": "Build a client-facing recommendation deck and a supporting HTML report.",
+    "audience": "client",
+    "objective": "recommend",
+    "preferredFormats": ["html", "pptx", "pdf", "email-html", "gas-project"],
+    "maxSlides": 6
+  },
+  "options": {
+    "enableLlm": true
+  }
+}

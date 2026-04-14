@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "outDir": "lib",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2019",
+    "types": ["office-js", "office-runtime"],
+    "lib": ["es2020", "dom"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "lib", ".test-dist", "lib-amd"],
+  "ts-node": {
+    "files": true
+  }
+}

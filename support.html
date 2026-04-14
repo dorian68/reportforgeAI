@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ReportForge AI Support</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Aptos, sans-serif;
+        background: linear-gradient(180deg, #f7fbfb, #eef5f5);
+        color: #17353a;
+      }
+
+      main {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 40px 20px 56px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid #d5e6e3;
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 16px 40px rgba(17, 57, 60, 0.08);
+      }
+
+      h1,
+      h2 {
+        margin-top: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .brand img {
+        width: 64px;
+        height: 64px;
+      }
+
+      p,
+      li {
+        line-height: 1.6;
+      }
+
+      code {
+        background: #eef7f6;
+        border-radius: 6px;
+        padding: 2px 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="card">
+        <div class="brand">
+          <img src="assets/reportforge-mark.svg" alt="ReportForge AI logo" />
+          <div>
+            <p>ReportForge AI</p>
+            <h1>Support And Deployment Notes</h1>
+          </div>
+        </div>
+        <p>
+          This add-in is designed to profile an Excel selection and generate workbook reporting
+          outputs plus companion artifacts for Apps Script, email, slides, and canvas-generated
+          reporting packs.
+        </p>
+
+        <h2>First-Line Setup</h2>
+        <ul>
+          <li>Launch the add-in inside Excel Desktop or Excel on the web.</li>
+          <li>Select a clean range with headers when possible.</li>
+          <li>Use the Excel report first before enabling external integrations.</li>
+        </ul>
+
+        <h2>Security Notes</h2>
+        <ul>
+          <li>Google access tokens are session-scoped.</li>
+          <li>AI provider API keys are session-scoped.</li>
+          <li>Apps Script web app deployment is private by default.</li>
+        </ul>
+
+        <h2>Environment</h2>
+        <p>
+          For production hosting, set <code>REPORTFORGE_BASE_URL</code> during the build so the
+          Office manifest points to the correct HTTPS origin.
+        </p>
+
+        <h2>Operational Guidance</h2>
+        <p>
+          For enterprise rollout, use managed Google Cloud credentials, a managed AI gateway, and
+          validate the add-in in both Excel Desktop and Excel Web before tenant distribution.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

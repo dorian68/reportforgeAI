@@ -1,0 +1,22 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rf-accent" x1="24" y1="18" x2="132" y2="138" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12A594"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="rf-signal" x1="60" y1="52" x2="123" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+  <rect x="18" y="18" width="124" height="124" rx="34" fill="#F4FBFA"/>
+  <rect x="22" y="22" width="116" height="116" rx="30" stroke="#C6E2DE" stroke-width="4"/>
+  <rect x="42" y="44" width="48" height="66" rx="14" fill="#FFFFFF" stroke="#C6E2DE" stroke-width="4"/>
+  <rect x="72" y="56" width="46" height="58" rx="14" fill="url(#rf-accent)"/>
+  <path d="M54 65H79" stroke="#6E8B90" stroke-width="6" stroke-linecap="round"/>
+  <path d="M54 80H79" stroke="#6E8B90" stroke-width="6" stroke-linecap="round"/>
+  <path d="M54 95H70" stroke="#6E8B90" stroke-width="6" stroke-linecap="round"/>
+  <path d="M84 91L95 80L103 88L117 72" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="117" cy="72" r="14" fill="url(#rf-signal)"/>
+  <path d="M113.5 72L116.5 75L122 69.5" stroke="#FFF8EF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quantity improved +5.3% from ORD-100001 to ORD-100008 Slide Outline</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --deck-accent: #b45309;
+        --deck-surface: #fff8ef;
+        --deck-border: #f4d7b2;
+        --deck-ink: #4a2800;
+        --deck-muted: #8a6130;
+        --deck-paper: #ffffff;
+        --deck-font: "Aptos", "Segoe UI", sans-serif;
+        --deck-shadow: rgba(15, 34, 44, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top left, rgba(255,255,255,0.85), transparent 32%),
+          linear-gradient(180deg, var(--deck-surface), #ffffff);
+        color: var(--deck-ink);
+        font-family: var(--deck-font);
+      }
+      .deck {
+        width: min(1280px, 100%);
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        display: grid;
+        gap: 20px;
+      }
+      .deck__hero {
+        border: 1px solid var(--deck-border);
+        border-radius: 24px;
+        background: linear-gradient(135deg, var(--deck-surface), #ffffff 74%);
+        padding: 24px;
+        box-shadow: 0 20px 42px -28px var(--deck-shadow);
+      }
+      .deck__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 7px 12px;
+        background: var(--deck-surface);
+        color: var(--deck-accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .deck__hero h1 {
+        margin: 14px 0 8px;
+        font-size: 34px;
+        line-height: 1.05;
+      }
+      .deck__hero p {
+        margin: 0;
+        max-width: 760px;
+        color: var(--deck-muted);
+        line-height: 1.55;
+      }
+      .deck__hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .deck__hero-chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--deck-border);
+        border-radius: 999px;
+        padding: 7px 12px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--deck-ink);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .deck__hero-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .deck__hero-card {
+        border: 1px solid var(--deck-border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 14px 16px;
+        display: grid;
+        gap: 6px;
+      }
+      .deck__hero-card strong {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--deck-accent);
+      }
+      .deck__hero-card p {
+        max-width: none;
+      }
+      .slide {
+        border: 1px solid var(--deck-border);
+        border-radius: 28px;
+        background: var(--deck-paper);
+        padding: 24px;
+        min-height: 660px;
+        display: grid;
+        gap: 22px;
+        box-shadow: 0 28px 70px -42px var(--deck-shadow);
+        break-after: page;
+        page-break-after: always;
+      }
+      .slide__header {
+        display: grid;
+        gap: 10px;
+      }
+      .slide__header--ribbon {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+      }
+      .slide__header--spotlight {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 18px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--deck-surface), #ffffff);
+      }
+      .slide__header--minimal {
+        grid-template-columns: minmax(0, 1fr) auto;
+        border-bottom: 1px solid var(--deck-border);
+        padding-bottom: 14px;
+      }
+      .slide__index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 110px;
+        border-radius: 999px;
+        padding: 8px 14px;
+        background: var(--deck-accent);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .slide__header h2 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+      .slide__subtitle {
+        margin: 8px 0 0;
+        color: var(--deck-muted);
+      }
+      .slide__header p {
+        margin: 0;
+        color: var(--deck-muted);
+      }
+      .slide__beat {
+        display: inline-flex;
+        align-items: center;
+        margin: 8px 0;
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--deck-accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .slide__headline {
+        min-width: 220px;
+        border: 1px solid var(--deck-border);
+        border-radius: 20px;
+        background: #ffffff;
+        padding: 14px 16px;
+        display: grid;
+        gap: 4px;
+      }
+      .slide__headline-label {
+        color: var(--deck-muted);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .slide__headline-value {
+        font-size: 24px;
+        line-height: 1.05;
+      }
+      .slide__headline-detail {
+        font-size: 12px;
+      }
+      .slide__body {
+        display: grid;
+        gap: 18px;
+      }
+      .slide__body--balanced {
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.92fr);
+      }
+      .slide__body--insight {
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 1fr);
+      }
+      .slide__body--stacked {
+        grid-template-columns: 1fr;
+      }
+      .slide__panel {
+        border-radius: 24px;
+        padding: 20px;
+        display: grid;
+        gap: 16px;
+      }
+      .slide__panel--soft {
+        background: var(--deck-surface);
+        border: 1px solid var(--deck-border);
+      }
+      .slide__panel--outlined {
+        background: #ffffff;
+        border: 2px solid var(--deck-border);
+      }
+      .slide__panel--solid {
+        background: linear-gradient(180deg, var(--deck-surface), #ffffff);
+        border: 1px solid var(--deck-border);
+      }
+      .slide__panel h3,
+      .slide__meta h3 {
+        margin: 0;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--deck-accent);
+      }
+      .slide__panel ul {
+        margin: 0;
+        padding-left: 20px;
+        display: grid;
+        gap: 12px;
+      }
+      .slide__panel li {
+        line-height: 1.55;
+      }
+      .slide__meta {
+        border-top: 1px solid var(--deck-border);
+        padding-top: 14px;
+        display: grid;
+        gap: 8px;
+      }
+      .slide__meta:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+      .slide__meta p {
+        margin: 0;
+        color: var(--deck-muted);
+        line-height: 1.55;
+      }
+      .slide-visual {
+        display: grid;
+        gap: 14px;
+      }
+      .slide-visual__header {
+        display: grid;
+        gap: 6px;
+      }
+      .slide-visual__header h3 {
+        margin: 0;
+      }
+      .slide-visual__scorecards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .slide-visual__scorecard,
+      .slide-visual__bar-row,
+      .slide-visual__line-legend-item {
+        border: 1px solid var(--deck-border);
+        border-radius: 16px;
+        background: #ffffff;
+        padding: 12px;
+      }
+      .slide-visual__label {
+        color: var(--deck-muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .slide-visual__value {
+        display: block;
+        margin-top: 6px;
+        font-size: 24px;
+        line-height: 1.1;
+      }
+      .slide-visual__note {
+        margin: 8px 0 0;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .slide-visual__bars {
+        display: grid;
+        gap: 12px;
+      }
+      .slide-visual__bar-copy {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .slide-visual__bar-track {
+        margin-top: 10px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.08);
+        height: 12px;
+        overflow: hidden;
+      }
+      .slide-visual__bar-fill {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--deck-accent), #40b3a6);
+      }
+      .slide-visual__line-shell {
+        display: grid;
+        gap: 12px;
+      }
+      .slide-visual__line-svg {
+        width: 100%;
+        max-height: 240px;
+        border: 1px solid var(--deck-border);
+        border-radius: 18px;
+        background: #ffffff;
+      }
+      .slide-visual__line-legend {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      @media (max-width: 900px) {
+        .slide {
+          min-height: auto;
+        }
+        .slide__body,
+        .slide__body--balanced,
+        .slide__body--insight,
+        .slide__body--stacked {
+          grid-template-columns: 1fr;
+        }
+        .slide__header--ribbon,
+        .slide__header--spotlight,
+        .slide__header--minimal,
+        .slide-visual__scorecards,
+        .slide-visual__line-legend {
+          grid-template-columns: 1fr;
+        }
+        .deck__hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media print {
+        @page {
+          size: landscape;
+          margin: 10mm;
+        }
+        body {
+          background: #ffffff;
+        }
+        .deck {
+          width: 100%;
+          padding: 0;
+          gap: 0;
+        }
+        .deck__hero {
+          display: none;
+        }
+        .slide {
+          border-radius: 0;
+          box-shadow: none;
+          border: none;
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck">
+      <section class="deck__hero">
+        <div class="deck__eyebrow">ReportForge Slide Deck</div>
+        <h1>Quantity improved +5.3% from ORD-100001 to ORD-100008 Slide Outline</h1>
+        <p>Clean board-style deck with a strong header ribbon and balanced content panels.</p>
+        <div class="deck__hero-meta">
+          <span class="deck__hero-chip">Executive leadership</span>
+          <span class="deck__hero-chip">Lead with headline business movement, then move to proof and decisions.</span>
+        </div>
+        <div class="deck__hero-grid">
+          <div class="deck__hero-card">
+            <strong>Visual Direction</strong>
+            <p>Premium scorecards, restrained charts, and clear decision framing.</p>
+          </div>
+          <div class="deck__hero-card">
+            <strong>Storytelling Brief</strong>
+            <p>Make every slide easy to retell after the meeting and close on action.</p>
+          </div>
+        </div>
+      </section>
+      
+        <section class="slide slide--balanced">
+          <header class="slide__header slide__header--ribbon">
+            <div class="slide__index">Slide 1</div>
+            <div>
+              <h2>Quantity improved +5.3% from ORD-100001 to ORD-100008</h2>
+              <p class="slide__subtitle">22 rows across 11 columns from Testdata Sales from TestData_Sales!A1:K23, prepared for executive review.</p>
+              <div class="slide__beat">EXECUTIVE Narrative Hook</div>
+              <p>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni...</p>
+            </div>
+            
+                  <div class="slide__headline">
+                    <span class="slide__headline-label">Quantity</span>
+                    <strong class="slide__headline-value">294</strong>
+                    <p class="slide__headline-detail">Total contribution across 22 populated records.</p>
+                  </div>
+                
+          </header>
+          <div class="slide__body slide__body--balanced">
+            <section class="slide__panel slide__panel--primary slide__panel--soft">
+              <h3>Visible Narrative</h3>
+              <ul><li>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni...</li><li>UnitPrice moved from 301.38 to 170.88, a material shift over the observed orderid. UnitPrice softened over time. This matters because leadership decisions will focus on material movement and timing. UnitPrice needs cl...</li></ul>
+            </section>
+            <section class="slide__panel slide__panel--secondary slide__panel--soft">
+              
+      <section class="slide-visual slide-visual--scorecard">
+        <header class="slide-visual__header">
+          <h3>Headline Metrics</h3>
+          <p>The opening scorecard keeps the lead metrics visible before the drivers.</p>
+        </header>
+        <div class="slide-visual__scorecards">
+          
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">Quantity</span>
+                  <strong class="slide-visual__value">294</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">UnitPrice</span>
+                  <strong class="slide-visual__value">7.5K</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">NetSales</span>
+                  <strong class="slide-visual__value">101.0K</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+        </div>
+      </section>
+    
+              
+                    <div class="slide__meta">
+                      <h3>Chart Caption</h3>
+                      <p>The opening scorecard makes the headline performance message visible before the evidence slides.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Implication</h3>
+                <p>The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Recommendation</h3>
+                      <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Presenter Notes</h3>
+                <p>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni... UnitPrice moved from 301.38 to 170.88, a material shift over the observed orderid. UnitPrice softened over time. This matters because leadership decisions will focus on material movement and timing. UnitPrice needs cl... Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Caveat</h3>
+                      <p>The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+                    </div>
+                  
+            </section>
+          </div>
+        </section>
+      
+        <section class="slide slide--balanced">
+          <header class="slide__header slide__header--ribbon">
+            <div class="slide__index">Slide 2</div>
+            <div>
+              <h2>Three messages frame the current performance discussion</h2>
+              <p class="slide__subtitle">22 rows across 11 columns from Testdata Sales from TestData_Sales!A1:K23, prepared for executive review.</p>
+              <div class="slide__beat">Executive Framing</div>
+              <p>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni...</p>
+            </div>
+            
+          </header>
+          <div class="slide__body slide__body--balanced">
+            <section class="slide__panel slide__panel--primary slide__panel--soft">
+              <h3>Visible Narrative</h3>
+              <ul><li>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni...</li><li>UnitPrice moved from 301.38 to 170.88, a material shift over the observed orderid. UnitPrice softened over time. This matters because leadership decisions will focus on material movement and timing. UnitPrice needs cl...</li><li>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled. The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</li></ul>
+            </section>
+            <section class="slide__panel slide__panel--secondary slide__panel--soft">
+              
+      <section class="slide-visual slide-visual--scorecard">
+        <header class="slide-visual__header">
+          <h3>Headline Metrics</h3>
+          <p>The scorecard keeps the visible numbers behind the three lead messages on one slide.</p>
+        </header>
+        <div class="slide-visual__scorecards">
+          
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">Quantity</span>
+                  <strong class="slide-visual__value">294</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">UnitPrice</span>
+                  <strong class="slide-visual__value">7.5K</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">NetSales</span>
+                  <strong class="slide-visual__value">101.0K</strong>
+                  <p class="slide-visual__note">Total contribution across 22 populated records.</p>
+                </article>
+              
+                <article class="slide-visual__scorecard">
+                  <span class="slide-visual__label">DiscountPct</span>
+                  <strong class="slide-visual__value">0.54</strong>
+                  <p class="slide-visual__note">Total contribution across 21 populated records.</p>
+                </article>
+              
+        </div>
+      </section>
+    
+              
+                    <div class="slide__meta">
+                      <h3>Chart Caption</h3>
+                      <p>This summary makes the story easy to repeat after the meeting and keeps the lead evidence visible.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Implication</h3>
+                <p>Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer monitoring in the next reporting cycle.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Recommendation</h3>
+                      <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Presenter Notes</h3>
+                <p>Quantity moved from 19 to 20, a noticeable shift over the observed orderid. Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer moni... Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled. The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Caveat</h3>
+                      <p>The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+                    </div>
+                  
+            </section>
+          </div>
+        </section>
+      
+        <section class="slide slide--balanced">
+          <header class="slide__header slide__header--ribbon">
+            <div class="slide__index">Slide 3</div>
+            <div>
+              <h2>Quantity improved +5.3% from ORD-100001 to ORD-100008</h2>
+              <p class="slide__subtitle">OrderID trend in quantity with +1 change between the first and latest period.</p>
+              <div class="slide__beat">Evidence And Movement</div>
+              <p>Quantity moved from 19 to 20, a noticeable shift over the observed orderid.</p>
+            </div>
+            
+                  <div class="slide__headline">
+                    <span class="slide__headline-label">Quantity</span>
+                    <strong class="slide__headline-value">294</strong>
+                    <p class="slide__headline-detail">Total contribution across 22 populated records.</p>
+                  </div>
+                
+          </header>
+          <div class="slide__body slide__body--balanced">
+            <section class="slide__panel slide__panel--primary slide__panel--soft">
+              <h3>Visible Narrative</h3>
+              <ul><li>ORD-100001 started at 19 and the latest period reached 20.</li><li>The movement is noticeable, which makes the trend material enough for a executive review.</li><li>Trend view for the leading measure over time.</li></ul>
+            </section>
+            <section class="slide__panel slide__panel--secondary slide__panel--soft">
+              
+      <section class="slide-visual slide-visual--line">
+        <header class="slide-visual__header">
+          <h3>Quantity by OrderID</h3>
+          <p>Quantity grouped by OrderID.</p>
+        </header>
+        
+    <div class="slide-visual__line-shell">
+      <svg viewBox="0 0 420 210" class="slide-visual__line-svg" aria-hidden="true">
+        <line
+          x1="28"
+          y1="176"
+          x2="392"
+          y2="176"
+          stroke="#f4d7b2"
+          stroke-width="2"
+        />
+        <line
+          x1="28"
+          y1="22"
+          x2="28"
+          y2="176"
+          stroke="#f4d7b2"
+          stroke-width="2"
+        />
+        <polyline
+          fill="none"
+          stroke="#b45309"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          points="28,56.22222222222222 100.8,150.33333333333334 173.6,167.44444444444443 246.4,22 319.2,39.111111111111114 392,176"
+        />
+        
+              <circle cx="28" cy="56.22222222222222" r="5" fill="#b45309" />
+              <text x="28" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100001</text>
+            
+              <circle cx="100.8" cy="150.33333333333334" r="5" fill="#b45309" />
+              <text x="100.8" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100002</text>
+            
+              <circle cx="173.6" cy="167.44444444444443" r="5" fill="#b45309" />
+              <text x="173.6" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100003</text>
+            
+              <circle cx="246.4" cy="22" r="5" fill="#b45309" />
+              <text x="246.4" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100004</text>
+            
+              <circle cx="319.2" cy="39.111111111111114" r="5" fill="#b45309" />
+              <text x="319.2" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100005</text>
+            
+              <circle cx="392" cy="176" r="5" fill="#b45309" />
+              <text x="392" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100006</text>
+            
+      </svg>
+      <div class="slide-visual__line-legend">
+        
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100001</span>
+                <strong class="slide-visual__value">19.0</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100002</span>
+                <strong class="slide-visual__value">8.00</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100003</span>
+                <strong class="slide-visual__value">6.00</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100004</span>
+                <strong class="slide-visual__value">23.0</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100005</span>
+                <strong class="slide-visual__value">21.0</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100006</span>
+                <strong class="slide-visual__value">5.00</strong>
+              </div>
+            
+      </div>
+    </div>
+  
+      </section>
+    
+              
+                    <div class="slide__meta">
+                      <h3>Chart Caption</h3>
+                      <p>Quantity across orderid highlights where the trend accelerated or weakened most clearly.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Implication</h3>
+                <p>Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer monitoring in the next reporting cycle.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Recommendation</h3>
+                      <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Presenter Notes</h3>
+                <p>Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer monitoring in the next reporting cycle. Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled. Narrative inferred from headers and observed data patterns.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Caveat</h3>
+                      <p>Narrative inferred from headers and observed data patterns.</p>
+                    </div>
+                  
+            </section>
+          </div>
+        </section>
+      
+        <section class="slide slide--balanced">
+          <header class="slide__header slide__header--ribbon">
+            <div class="slide__index">Slide 4</div>
+            <div>
+              <h2>UnitPrice softened -43.3% from ORD-100001 to ORD-100008</h2>
+              <p class="slide__subtitle">OrderID trend in unitprice with -130.50 change between the first and latest period.</p>
+              <div class="slide__beat">Deeper Proof</div>
+              <p>UnitPrice moved from 301.38 to 170.88, a material shift over the observed orderid.</p>
+            </div>
+            
+                  <div class="slide__headline">
+                    <span class="slide__headline-label">UnitPrice</span>
+                    <strong class="slide__headline-value">7.5K</strong>
+                    <p class="slide__headline-detail">Total contribution across 22 populated records.</p>
+                  </div>
+                
+          </header>
+          <div class="slide__body slide__body--balanced">
+            <section class="slide__panel slide__panel--primary slide__panel--soft">
+              <h3>Visible Narrative</h3>
+              <ul><li>ORD-100001 started at 301.38 and the latest period reached 170.88.</li><li>The movement is material, which makes the trend material enough for a executive review.</li><li>Trend view for the leading measure over time.</li></ul>
+            </section>
+            <section class="slide__panel slide__panel--secondary slide__panel--soft">
+              
+      <section class="slide-visual slide-visual--line">
+        <header class="slide-visual__header">
+          <h3>UnitPrice by OrderID</h3>
+          <p>UnitPrice grouped by OrderID.</p>
+        </header>
+        
+    <div class="slide-visual__line-shell">
+      <svg viewBox="0 0 420 210" class="slide-visual__line-svg" aria-hidden="true">
+        <line
+          x1="28"
+          y1="176"
+          x2="392"
+          y2="176"
+          stroke="#f4d7b2"
+          stroke-width="2"
+        />
+        <line
+          x1="28"
+          y1="22"
+          x2="28"
+          y2="176"
+          stroke="#f4d7b2"
+          stroke-width="2"
+        />
+        <polyline
+          fill="none"
+          stroke="#b45309"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          points="28,147.72346554989463 100.8,170.6566859612153 173.6,22 246.4,176 319.2,147.69162954466643 392,174.57662247592626"
+        />
+        
+              <circle cx="28" cy="147.72346554989463" r="5" fill="#b45309" />
+              <text x="28" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100001</text>
+            
+              <circle cx="100.8" cy="170.6566859612153" r="5" fill="#b45309" />
+              <text x="100.8" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100002</text>
+            
+              <circle cx="173.6" cy="22" r="5" fill="#b45309" />
+              <text x="173.6" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100003</text>
+            
+              <circle cx="246.4" cy="176" r="5" fill="#b45309" />
+              <text x="246.4" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100004</text>
+            
+              <circle cx="319.2" cy="147.69162954466643" r="5" fill="#b45309" />
+              <text x="319.2" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100005</text>
+            
+              <circle cx="392" cy="174.57662247592626" r="5" fill="#b45309" />
+              <text x="392" y="200" text-anchor="middle" fill="#8a6130" font-size="11">ORD-100006</text>
+            
+      </svg>
+      <div class="slide-visual__line-legend">
+        
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100001</span>
+                <strong class="slide-visual__value">301</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100002</span>
+                <strong class="slide-visual__value">78.1</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100003</span>
+                <strong class="slide-visual__value">1.5k</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100004</span>
+                <strong class="slide-visual__value">26.0</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100005</span>
+                <strong class="slide-visual__value">302</strong>
+              </div>
+            
+              <div class="slide-visual__line-legend-item">
+                <span class="slide-visual__label">ORD-100006</span>
+                <strong class="slide-visual__value">39.9</strong>
+              </div>
+            
+      </div>
+    </div>
+  
+      </section>
+    
+              
+                    <div class="slide__meta">
+                      <h3>Chart Caption</h3>
+                      <p>UnitPrice across orderid highlights where the trend accelerated or weakened most clearly.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Implication</h3>
+                <p>UnitPrice softened over time. This matters because leadership decisions will focus on material movement and timing. UnitPrice needs closer monitoring in the next reporting cycle.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Recommendation</h3>
+                      <p>Review the driver behind the recent weakness in unitprice and decide whether escalation or corrective action is needed.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Presenter Notes</h3>
+                <p>UnitPrice softened over time. This matters because leadership decisions will focus on material movement and timing. UnitPrice needs closer monitoring in the next reporting cycle. Review the driver behind the recent weakness in unitprice and decide whether escalation or corrective action is needed. Narrative inferred from headers and observed data patterns.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Caveat</h3>
+                      <p>Narrative inferred from headers and observed data patterns.</p>
+                    </div>
+                  
+            </section>
+          </div>
+        </section>
+      
+        <section class="slide slide--balanced">
+          <header class="slide__header slide__header--ribbon">
+            <div class="slide__index">Slide 5</div>
+            <div>
+              <h2>Confirm whether the improvement in quantity is repeatable in the next...</h2>
+              <p class="slide__subtitle">Close the deck on the action posture this executive review should retain.</p>
+              <div class="slide__beat">Decision And Next Step</div>
+              <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+            </div>
+            
+          </header>
+          <div class="slide__body slide__body--balanced">
+            <section class="slide__panel slide__panel--primary slide__panel--soft">
+              <h3>Visible Narrative</h3>
+              <ul><li>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</li><li>Review the driver behind the recent weakness in unitprice and decide whether escalation or corrective action is needed.</li><li>Confirm whether the improvement in discountpct is repeatable in the next cycle and which driver should be scaled.</li><li>Use quantity as a headline metric, then connect it to the main driver and the next action.</li></ul>
+            </section>
+            <section class="slide__panel slide__panel--secondary slide__panel--soft">
+              
+                    <div class="slide__meta">
+                      <h3>Visual Direction</h3>
+                      <p>An action matrix or compact roadmap should clarify ownership and timing at a glance.</p>
+                    </div>
+                  
+              
+              <div class="slide__meta">
+                <h3>Implication</h3>
+                <p>Quantity improved over time. This matters because leadership decisions will focus on material movement and timing. Quantity needs closer monitoring in the next reporting cycle.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Recommendation</h3>
+                      <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled.</p>
+                    </div>
+                  
+              <div class="slide__meta">
+                <h3>Presenter Notes</h3>
+                <p>Confirm whether the improvement in quantity is repeatable in the next cycle and which driver should be scaled. The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+              </div>
+              
+                    <div class="slide__meta">
+                      <h3>Caveat</h3>
+                      <p>The dataset is well populated, so the narrative can stay decision-oriented rather than purely directional.</p>
+                    </div>
+                  
+            </section>
+          </div>
+        </section>
+      
+    </main>
+  </body>
+</html>

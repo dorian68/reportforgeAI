@@ -1,0 +1,41 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "noEmit": false,
+    "outDir": ".test-dist",
+    "rootDir": ".",
+    "types": ["node", "office-js", "office-runtime"],
+    "lib": ["es2020", "dom"]
+  },
+  "include": [
+    "src/domain/**/*",
+    "src/generators/**/*",
+    "src/services/ai/**/*",
+    "src/services/diagnostics/**/*",
+    "src/services/google/**/*",
+    "src/services/office/capabilities.ts",
+    "src/services/office/guardrails.ts",
+    "src/services/persistence/**/*",
+    "src/services/slides/**/*",
+    "src/shared/**/*",
+    "src/reporting-engine/**/*",
+    "src/site/**/*",
+    "src/components/**/*",
+    "src/vendor/**/*",
+    "src/taskpane/workflowFreshness.ts",
+    "src/taskpane/workspaceNavigation.ts",
+    "src/taskpane/views/**/*",
+    "src/types/**/*",
+    "src/utils/**/*",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "src/services/office/executeAgentPlan.ts",
+    "src/services/office/getSelectedRangeSnapshot.ts",
+    "src/services/office/renderExcelReport.ts",
+    "src/taskpane/App.tsx",
+    "src/taskpane/index.tsx",
+    "src/taskpane/TaskpaneErrorBoundary.tsx"
+  ]
+}
