@@ -10,14 +10,32 @@ const { buildMarketingSiteMeta, normalizeBaseUrl } = require("./scripts/site-bui
 
 const urlDev = "https://localhost:3000/";
 const urlDevOrigin = "https://localhost:3000";
-const productionBaseUrl = process.env.REPORTFORGE_BASE_URL || process.env.REPORTFORGE_PROD_URL || "";
-const urlProd = productionBaseUrl ? normalizeBaseUrl(productionBaseUrl) : "";
-const urlProdOrigin = urlProd ? urlProd.replace(/\/$/, "") : "";
 const managedLlmDevPath = "/api/reportforge/llm/chat/completions";
 const managedSiteLeadDevPath = "/api/reportforge/site/lead";
 
 function normalize(value) {
   return value?.trim?.() ?? "";
+}
+
+function normalizeHostedBaseUrl(value) {
+  const normalizedValue = normalize(value);
+  if (!normalizedValue) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(normalizedValue)) {
+    return normalizeBaseUrl(normalizedValue);
+  }
+
+  return normalizeBaseUrl(`https://${normalizedValue.replace(/^\/+/, "")}`);
+}
+
+function resolveProductionBaseUrl(runtimeEnv) {
+  return (
+    normalizeHostedBaseUrl(runtimeEnv.REPORTFORGE_BASE_URL) ||
+    normalizeHostedBaseUrl(runtimeEnv.REPORTFORGE_PROD_URL) ||
+    normalizeHostedBaseUrl(runtimeEnv.CF_PAGES_URL)
+  );
 }
 
 async function getHttpsOptions() {
@@ -266,12 +284,6 @@ async function handleSiteLeadRequest(req, res) {
 
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
-  if (!dev && !urlProd) {
-    throw new Error(
-      "REPORTFORGE_BASE_URL (or REPORTFORGE_PROD_URL) is required for production builds so the packaged manifest never falls back to a placeholder host."
-    );
-  }
-
   const fileEnv = {
     ...loadEnvFile(".env"),
     ...loadEnvFile(".env.local"),
@@ -280,6 +292,15 @@ module.exports = async (env, options) => {
     ...fileEnv,
     ...process.env,
   };
+  const urlProd = resolveProductionBaseUrl(runtimeEnv);
+  const urlProdOrigin = urlProd ? urlProd.replace(/\/$/, "") : "";
+
+  if (!dev && !urlProd) {
+    throw new Error(
+      "REPORTFORGE_BASE_URL (or REPORTFORGE_PROD_URL) is required for production builds. On Cloudflare Pages, CF_PAGES_URL can also be used automatically if it is present."
+    );
+  }
+
   const googleOAuthClientId =
     normalize(runtimeEnv.REPORTFORGE_GOOGLE_CLIENT_ID) || loadGoogleOAuthClientId();
   const managedLlmConfig = resolveManagedLlmConfig(runtimeEnv, dev);
