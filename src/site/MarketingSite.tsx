@@ -507,34 +507,113 @@ function GasMock() {
 }
 
 function HeroShowcase() {
+  const sequence = [
+    {
+      code: "01",
+      title: "Source range locked",
+      detail: "The operating layer starts from the exact worksheet selection teams already trust.",
+    },
+    {
+      code: "02",
+      title: "Story brief governed",
+      detail: "Audience, decision, KPI hierarchy, and output tone stay aligned across channels.",
+    },
+    {
+      code: "03",
+      title: "Decision surfaces issued",
+      detail: "Dashboards, decks, web apps, and executive summaries ship from the same plan.",
+    },
+  ];
+
   return (
-    <div className="rf-site-showcase">
-      <article className="rf-site-showcase__main">
-        <div className="rf-site-showcase__badge">{"Excel > Brief > Story > Outputs"}</div>
-        <strong>Conversation-led intake inside Excel, then finished reporting outputs from the same plan.</strong>
-        <img
-          src="assets/reportforge-store-shot-01.png"
-          alt="ReportForge AI Excel intake screenshot"
-        />
-      </article>
-      <div className="rf-site-showcase__stack">
-        <article className="rf-site-showcase__card">
-          <span>Executive deck</span>
-          <strong>Message-led slides with clearer purpose and less repetitive recap.</strong>
-          <p>Good for board reviews, leadership updates, and client-facing presentation packs.</p>
+    <div className="rf-site-command">
+      <div className="rf-site-command__frame">
+        <div className="rf-site-command__heading">
+          <span className="rf-site-command__eyebrow">Reporting operating layer</span>
+          <strong>From spreadsheet range to finished decision surface.</strong>
+          <p>
+            ReportForge does not just rewrite notes. It structures the reporting sequence, holds the
+            narrative brief, and outputs buyer-ready surfaces with consistent message control.
+          </p>
+        </div>
+        <div className="rf-site-command__track">
+          {sequence.map((step) => (
+            <article key={step.code} className="rf-site-command__step">
+              <span>{step.code}</span>
+              <div>
+                <strong>{step.title}</strong>
+                <p>{step.detail}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div className="rf-site-command__surface">
+        <article className="rf-site-command__shot">
+          <div className="rf-site-command__shot-label">Excel intake surface</div>
+          <img
+            src="assets/reportforge-store-shot-01.png"
+            alt="ReportForge AI Excel intake screenshot"
+          />
         </article>
-        <article className="rf-site-showcase__card">
-          <span>HTML dashboard</span>
-          <strong>Premium reporting surface with KPI hierarchy, trend, comparison, and actions.</strong>
-          <p>Built for managers who need a polished link, not another stitched-together spreadsheet.</p>
-        </article>
-        <article className="rf-site-showcase__card">
-          <span>Apps Script web app</span>
-          <strong>Lightweight distribution path for teams that need shareable reporting fast.</strong>
-          <p>Useful when you need something closer to a product surface than an exported file.</p>
-        </article>
+        <div className="rf-site-command__rail">
+          <article className="rf-site-command__rail-card">
+            <span>Deck output</span>
+            <strong>Executive communication quality, not recap slides.</strong>
+            <p>Message-led slide structure with tighter purpose, cleaner proof, and less repetition.</p>
+          </article>
+          <article className="rf-site-command__rail-card">
+            <span>Dashboard output</span>
+            <strong>Premium reporting surface for managers and operating reviews.</strong>
+            <p>KPI hierarchy, comparison, and actions sit in a deliberate reporting layout.</p>
+          </article>
+          <article className="rf-site-command__rail-card">
+            <span>Web app output</span>
+            <strong>Shareable delivery without waiting on a BI program.</strong>
+            <p>Useful when a team needs something productized faster than a dashboard rebuild.</p>
+          </article>
+        </div>
       </div>
     </div>
+  );
+}
+
+function PositioningBand() {
+  const items = [
+    {
+      label: "Excel-first wedge",
+      title: "Start where the numbers are already trusted.",
+      detail:
+        "ReportForge begins with the spreadsheet selection instead of forcing a new BI model or a separate reporting stack.",
+    },
+    {
+      label: "Story control",
+      title: "One brief governs every output.",
+      detail:
+        "The same planning layer shapes dashboards, decks, Apps Script web apps, and executive summaries.",
+    },
+    {
+      label: "Premium finish",
+      title: "The result reads like decision infrastructure.",
+      detail:
+        "Teams get outputs that feel board-ready, client-ready, and operationally credible without hand-building every surface.",
+    },
+  ];
+
+  return (
+    <section className="rf-site-band">
+      <div className="rf-site-shell">
+        <div className="rf-site-band__grid">
+          {items.map((item) => (
+            <article key={item.label} className="rf-site-band__item">
+              <span>{item.label}</span>
+              <strong>{item.title}</strong>
+              <p>{item.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -585,34 +664,38 @@ function OverviewTabContent() {
     <>
       <section className="rf-site-section" id="product">
         <div className="rf-site-shell rf-site-shell--narrow">
-          <SectionHeader
-            eyebrow={content.workflow.eyebrow}
-            title={content.workflow.title}
-            summary={content.workflow.summary}
-          />
-          <div className="rf-site-steps">
-            {content.workflow.steps.map((step, index) => (
-              <article key={step.title}>
-                <div className="rf-site-step__index">0{index + 1}</div>
-                <strong>{step.title}</strong>
-                <p>{step.detail}</p>
-              </article>
-            ))}
+          <div className="rf-site-sequence">
+            <div className="rf-site-sequence__intro">
+              <SectionHeader
+                eyebrow={content.workflow.eyebrow}
+                title={content.workflow.title}
+                summary={content.workflow.summary}
+              />
+            </div>
+            <div className="rf-site-steps">
+              {content.workflow.steps.map((step, index) => (
+                <article key={step.title}>
+                  <div className="rf-site-step__index">0{index + 1}</div>
+                  <strong>{step.title}</strong>
+                  <p>{step.detail}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="rf-site-section rf-site-section--muted" id="before-after">
         <div className="rf-site-shell">
-          <div className="rf-site-before-after">
-            <div className="rf-site-panel">
+          <div className="rf-site-shift">
+            <div className="rf-site-shift__intro">
               <SectionHeader
                 eyebrow={content.beforeAfter.eyebrow}
                 title={content.beforeAfter.title}
               />
             </div>
             <div className="rf-site-list-panels">
-              <article className="rf-site-list-card">
+              <article className="rf-site-list-card rf-site-list-card--before">
                 <span>Before</span>
                 <ul>
                   {content.beforeAfter.before.map((item) => (
@@ -643,23 +726,28 @@ function ProductTabContent() {
     <>
       <section className="rf-site-section" id="outputs">
         <div className="rf-site-shell">
-          <SectionHeader
-            eyebrow={content.outputs.eyebrow}
-            title={content.outputs.title}
-          />
-          <div className="rf-site-output-grid">
-            {content.outputs.items.map((item) => (
-              <article key={item.title} className="rf-site-output-card">
-                <strong>{item.title}</strong>
-                <p>{item.summary}</p>
-                <span>{item.benefit}</span>
-              </article>
-            ))}
-          </div>
-          <div className="rf-site-screen-grid" id="screens">
-            <DashboardMock />
-            <DeckMock />
-            <GasMock />
+          <div className="rf-site-operating-matrix">
+            <div className="rf-site-operating-matrix__copy">
+              <SectionHeader
+                eyebrow={content.outputs.eyebrow}
+                title={content.outputs.title}
+                summary="The operating advantage is not one isolated artifact. ReportForge keeps the reporting brief coherent across every delivery channel."
+              />
+              <div className="rf-site-output-grid">
+                {content.outputs.items.map((item) => (
+                  <article key={item.title} className="rf-site-output-card">
+                    <strong>{item.title}</strong>
+                    <p>{item.summary}</p>
+                    <span>{item.benefit}</span>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="rf-site-screen-grid" id="screens">
+              <DashboardMock />
+              <DeckMock />
+              <GasMock />
+            </div>
           </div>
         </div>
       </section>
@@ -1278,24 +1366,25 @@ export function MarketingSite() {
                 <ButtonLink cta={content.hero.secondaryCta} onNavigate={navigateTo} />
                 <ButtonLink cta={content.hero.tertiaryCta} onNavigate={navigateTo} />
               </div>
-              <div className="rf-site-hero__proof">
-                {content.signals.map((signal) => (
-                  <article key={signal.label}>
-                    <span>{signal.label}</span>
-                    <strong>{signal.value}</strong>
-                    <p>{signal.detail}</p>
-                  </article>
-                ))}
-              </div>
             </div>
             <div className="rf-site-hero__visual">
               <HeroShowcase />
             </div>
           </div>
+          <div className="rf-site-hero__proof">
+            {content.signals.map((signal) => (
+              <article key={signal.label}>
+                <span>{signal.label}</span>
+                <strong>{signal.value}</strong>
+                <p>{signal.detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </header>
 
       <main className="rf-site-main">
+        <PositioningBand />
         <section className="rf-site-tab-shell">
           <div className="rf-site-shell">
             <div className="rf-site-tab-panel">
