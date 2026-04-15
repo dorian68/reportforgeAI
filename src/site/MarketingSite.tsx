@@ -57,7 +57,36 @@ type SiteRoute = {
 };
 
 const defaultPrerenderRoute: SiteRoute = {};
-const trackedSiteSections = ["top", "workflow", "outputs", "buyers", "pricing", "faq", "launch-request"] as const;
+const trackedSiteSections = [
+  "top",
+  "workflow",
+  "before-after",
+  "outputs",
+  "store-assets",
+  "security",
+  "buyers",
+  "use-cases",
+  "comparison",
+  "pricing",
+  "launch-request",
+  "faq",
+  "closing",
+] as const;
+const siteSectionToNavAnchor: Record<(typeof trackedSiteSections)[number], string> = {
+  top: "top",
+  workflow: "workflow",
+  "before-after": "workflow",
+  outputs: "outputs",
+  "store-assets": "outputs",
+  security: "outputs",
+  buyers: "buyers",
+  "use-cases": "buyers",
+  comparison: "buyers",
+  pricing: "pricing",
+  "launch-request": "launch-request",
+  faq: "faq",
+  closing: "launch-request",
+};
 
 type SiteLinkProps = {
   href: string;
@@ -473,126 +502,39 @@ function HeroShowcase() {
       detail: "Dashboards, decks, web apps, and executive summaries all ship from the same reporting plan.",
     },
   ];
-  const dossier = [
-    { label: "Source", value: "Workbook range" },
-    { label: "Decision", value: "Weekly review / board pack" },
-    { label: "Governance", value: "Deterministic + AI" },
-  ];
-  const issuance = [
-    {
-      label: "Deck",
-      title: "Executive narrative with stronger message hierarchy.",
-      note: "Built for leadership review, not recap slides.",
-    },
-    {
-      label: "Dashboard",
-      title: "A reporting surface that reads like finished software.",
-      note: "KPI architecture, comparisons, and actions stay aligned.",
-    },
-    {
-      label: "Web app",
-      title: "Distribution without waiting for a BI program to land.",
-      note: "Useful when the workbook has to become something shareable fast.",
-    },
-  ];
 
   return (
     <div className="rf-site-command">
       <div className="rf-site-command__masthead">
-        <span>Operating layer</span>
-        <strong>Workbook selection -&gt; reporting brief -&gt; issued outputs</strong>
+        <span>Excel-native reporting flow</span>
+        <strong>One brief governs every output</strong>
       </div>
-      <div className="rf-site-command__frame">
-        <div className="rf-site-command__heading">
-          <span className="rf-site-command__eyebrow">Excel to reporting system</span>
-          <strong>From spreadsheet range to finished decision surface.</strong>
+      <article className="rf-site-command__shot">
+        <div className="rf-site-command__shot-label">Excel intake surface</div>
+        <img
+          src="assets/reportforge-store-shot-01.png"
+          alt="ReportForge AI Excel intake screenshot"
+        />
+        <div className="rf-site-command__caption">
+          <strong>Selection, brief, and story plan stay inside one operating surface.</strong>
           <p>
-            ReportForge does more than rewrite notes. It preserves the reporting brief, shapes the
-            story once, and issues outputs that feel authored rather than assembled.
+            That is why the deck, dashboard, and web app read as one reporting system instead of
+            three separate exports.
           </p>
         </div>
-        <div className="rf-site-command__dossier">
-          {dossier.map((item) => (
-            <article key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-            </article>
-          ))}
-        </div>
-        <div className="rf-site-command__track">
-          {sequence.map((step) => (
-            <article key={step.code} className="rf-site-command__step">
-              <span>{step.code}</span>
-              <div>
-                <strong>{step.title}</strong>
-                <p>{step.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-      <div className="rf-site-command__surface">
-        <article className="rf-site-command__shot">
-          <div className="rf-site-command__shot-label">Excel intake surface</div>
-          <img
-            src="assets/reportforge-store-shot-01.png"
-            alt="ReportForge AI Excel intake screenshot"
-          />
-        </article>
-        <div className="rf-site-command__issuance">
-          {issuance.map((item) => (
-            <article key={item.label} className="rf-site-command__issuance-card">
-              <span>{item.label}</span>
-              <strong>{item.title}</strong>
-              <p>{item.note}</p>
-            </article>
-          ))}
-        </div>
+      </article>
+      <div className="rf-site-command__track">
+        {sequence.map((step) => (
+          <article key={step.code} className="rf-site-command__step">
+            <span>{step.code}</span>
+            <div>
+              <strong>{step.title}</strong>
+              <p>{step.detail}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
-  );
-}
-
-function PositioningBand() {
-  const items = [
-    {
-      index: "01",
-      label: "Excel-native",
-      title: "Start where the numbers are already trusted.",
-      detail:
-        "ReportForge begins with the spreadsheet selection instead of forcing a new BI model or a new reporting stack.",
-    },
-    {
-      index: "02",
-      label: "Story planning",
-      title: "One reporting brief governs every output.",
-      detail:
-        "The same planning layer shapes dashboards, decks, Apps Script web apps, and executive summaries.",
-    },
-    {
-      index: "03",
-      label: "Decision-ready",
-      title: "The result reads like finished reporting, not stitched exports.",
-      detail:
-        "Teams get outputs that feel board-ready, client-ready, and operationally credible without hand-building every surface.",
-    },
-  ];
-
-  return (
-    <section className="rf-site-band">
-      <div className="rf-site-shell">
-        <div className="rf-site-band__grid">
-          {items.map((item) => (
-            <article key={item.label} className="rf-site-band__item">
-              <b>{item.index}</b>
-              <span>{item.label}</span>
-              <strong>{item.title}</strong>
-              <p>{item.detail}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -648,21 +590,19 @@ function OverviewTabContent() {
     <>
       <section className="rf-site-section" id="workflow">
         <div className="rf-site-shell rf-site-shell--narrow">
-          <div className="rf-site-sequence">
-            <div className="rf-site-sequence__intro">
-              <SectionHeader
-                eyebrow={content.workflow.eyebrow}
-                title={content.workflow.title}
-                summary={content.workflow.summary}
-              />
-              <div className="rf-site-sequence__rail">
-                <span>Why this wedge wins</span>
-                <ul>
-                  {rail.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+          <div className="rf-site-workflow">
+            <SectionHeader
+              eyebrow={content.workflow.eyebrow}
+              title={content.workflow.title}
+              summary={content.workflow.summary}
+            />
+            <div className="rf-site-sequence__rail">
+              <span>Why this wedge wins</span>
+              <ul>
+                {rail.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
             <div className="rf-site-steps">
               {content.workflow.steps.map((step, index) => (
@@ -713,28 +653,18 @@ function OverviewTabContent() {
 
 function ProductTabContent() {
   const content = marketingSiteContent;
-  const outputNotes = [
-    "Dashboard-grade HTML with stronger hierarchy",
-    "Deck narrative shaped before slide export",
-    "Apps Script web delivery for lightweight sharing",
-  ];
 
   return (
     <>
       <section className="rf-site-section" id="outputs">
         <div className="rf-site-shell">
-          <div className="rf-site-operating-matrix">
-            <div className="rf-site-operating-matrix__copy">
+          <div className="rf-site-output-stage">
+            <div className="rf-site-output-stage__copy">
               <SectionHeader
                 eyebrow={content.outputs.eyebrow}
                 title={content.outputs.title}
                 summary="The operating advantage is not one isolated artifact. ReportForge keeps the reporting brief coherent across every delivery channel."
               />
-              <div className="rf-site-operating-matrix__rail">
-                {outputNotes.map((note) => (
-                  <article key={note}>{note}</article>
-                ))}
-              </div>
               <div className="rf-site-output-grid">
                 {content.outputs.items.map((item) => (
                   <article key={item.title} className="rf-site-output-card">
@@ -745,10 +675,12 @@ function ProductTabContent() {
                 ))}
               </div>
             </div>
-            <div className="rf-site-screen-grid" id="screens">
+            <div className="rf-site-output-stage__proof" id="screens">
               <DashboardMock />
-              <DeckMock />
-              <GasMock />
+              <div className="rf-site-output-stage__stack">
+                <DeckMock />
+                <GasMock />
+              </div>
             </div>
           </div>
         </div>
@@ -801,10 +733,10 @@ function BuyersTabContent() {
               eyebrow={content.personas.eyebrow}
               title={content.personas.title}
             />
-            <div className="rf-site-buyer-intro__panel">
-              <span>Buying signal</span>
-              <strong>The sale lands fastest where important reporting still passes through Excel before leadership sees it.</strong>
-            </div>
+            <p className="rf-site-buyer-intro__summary">
+              The sale lands fastest where important reporting still passes through Excel before
+              leadership sees it.
+            </p>
           </div>
           <div className="rf-site-persona-grid">
             {content.personas.items.map((persona) => (
@@ -1126,53 +1058,58 @@ function LeadCapturePanel() {
             rows={5}
           />
         </label>
-        <div className="rf-site-launch__meta">
-          <label>
-            <span>Preferred plan</span>
-            <select
-              name="selectedPlan"
-              value={form.selectedPlan}
-              onChange={(event) => updateField("selectedPlan", event.target.value)}
-            >
-              {marketingSiteContent.pricing.tiers.map((tier) => (
-                <option key={tier.name} value={tier.name}>
-                  {tier.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            <span>Primary use case</span>
-            <select
-              name="useCase"
-              value={form.useCase}
-              onChange={(event) => updateField("useCase", event.target.value)}
-            >
-              {marketingSiteContent.useCases.items.map((item) => (
-                <option key={item.title} value={item.title}>
-                  {item.title}
-                </option>
-              ))}
-            </select>
-          </label>
+        <div className="rf-site-launch__optional">
+          <span>Optional context</span>
+          <div className="rf-site-launch__meta">
+            <label>
+              <span>Preferred plan</span>
+              <select
+                name="selectedPlan"
+                value={form.selectedPlan}
+                onChange={(event) => updateField("selectedPlan", event.target.value)}
+              >
+                {marketingSiteContent.pricing.tiers.map((tier) => (
+                  <option key={tier.name} value={tier.name}>
+                    {tier.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>Primary use case</span>
+              <select
+                name="useCase"
+                value={form.useCase}
+                onChange={(event) => updateField("useCase", event.target.value)}
+              >
+                {marketingSiteContent.useCases.items.map((item) => (
+                  <option key={item.title} value={item.title}>
+                    {item.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         </div>
         <div className="rf-site-launch__actions">
           <button type="submit" disabled={isSubmitting || !leadEndpointConfigured}>
             {isSubmitting ? "Submitting..." : "Request Pilot"}
           </button>
-          <button type="button" onClick={handleCopyBrief}>
-            Copy brief
-          </button>
-          <button type="button" className="is-secondary" onClick={handleDownloadBrief}>
-            Download brief
-          </button>
           {salesEmailConfigured ? (
-            <a className="rf-site-button rf-site-button--primary" href={salesMailto}>
+            <a className="rf-site-button rf-site-button--secondary" href={salesMailto}>
               Email sales
             </a>
           ) : (
             <div className="rf-site-launch__hint">{marketingSiteContent.leadCapture.note}</div>
           )}
+        </div>
+        <div className="rf-site-launch__utility">
+          <button type="button" onClick={handleCopyBrief}>
+            Copy brief
+          </button>
+          <button type="button" onClick={handleDownloadBrief}>
+            Download brief
+          </button>
         </div>
         {!leadEndpointConfigured ? (
           <p className="rf-site-launch__hint">
@@ -1311,7 +1248,8 @@ export function MarketingSite() {
           .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
 
         if (visibleSections[0]?.target.id) {
-          setActiveSection(visibleSections[0].target.id);
+          const visibleId = visibleSections[0].target.id as (typeof trackedSiteSections)[number];
+          setActiveSection(siteSectionToNavAnchor[visibleId] ?? visibleId);
         }
       },
       {
@@ -1383,7 +1321,6 @@ export function MarketingSite() {
               <div className="rf-site-hero__actions">
                 <ButtonLink cta={content.hero.primaryCta} onNavigate={navigateTo} />
                 <ButtonLink cta={content.hero.secondaryCta} onNavigate={navigateTo} />
-                <ButtonLink cta={content.hero.tertiaryCta} onNavigate={navigateTo} />
               </div>
             </div>
             <div className="rf-site-hero__visual">
@@ -1403,7 +1340,6 @@ export function MarketingSite() {
       </header>
 
       <main className="rf-site-main">
-        <PositioningBand />
         <OverviewTabContent />
         <ProductTabContent />
         <BuyersTabContent />
