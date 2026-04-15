@@ -473,17 +473,51 @@ function HeroShowcase() {
       detail: "Dashboards, decks, web apps, and executive summaries all ship from the same reporting plan.",
     },
   ];
+  const dossier = [
+    { label: "Source", value: "Workbook range" },
+    { label: "Decision", value: "Weekly review / board pack" },
+    { label: "Governance", value: "Deterministic + AI" },
+  ];
+  const issuance = [
+    {
+      label: "Deck",
+      title: "Executive narrative with stronger message hierarchy.",
+      note: "Built for leadership review, not recap slides.",
+    },
+    {
+      label: "Dashboard",
+      title: "A reporting surface that reads like finished software.",
+      note: "KPI architecture, comparisons, and actions stay aligned.",
+    },
+    {
+      label: "Web app",
+      title: "Distribution without waiting for a BI program to land.",
+      note: "Useful when the workbook has to become something shareable fast.",
+    },
+  ];
 
   return (
     <div className="rf-site-command">
+      <div className="rf-site-command__masthead">
+        <span>Operating layer</span>
+        <strong>Workbook selection -&gt; reporting brief -&gt; issued outputs</strong>
+      </div>
       <div className="rf-site-command__frame">
         <div className="rf-site-command__heading">
           <span className="rf-site-command__eyebrow">Excel to reporting system</span>
           <strong>From spreadsheet range to finished decision surface.</strong>
           <p>
-            ReportForge does more than rewrite notes. It keeps the reporting brief intact, shapes the
-            story once, and produces outputs that read like finished software-backed reporting.
+            ReportForge does more than rewrite notes. It preserves the reporting brief, shapes the
+            story once, and issues outputs that feel authored rather than assembled.
           </p>
+        </div>
+        <div className="rf-site-command__dossier">
+          {dossier.map((item) => (
+            <article key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </article>
+          ))}
         </div>
         <div className="rf-site-command__track">
           {sequence.map((step) => (
@@ -505,22 +539,14 @@ function HeroShowcase() {
             alt="ReportForge AI Excel intake screenshot"
           />
         </article>
-        <div className="rf-site-command__rail">
-          <article className="rf-site-command__rail-card">
-            <span>Deck output</span>
-            <strong>Executive communication quality, not recap slides.</strong>
-            <p>Message-led slide structure with tighter purpose, cleaner proof, and less repetition.</p>
-          </article>
-          <article className="rf-site-command__rail-card">
-            <span>Dashboard output</span>
-            <strong>Premium reporting surface for managers and operating reviews.</strong>
-            <p>KPI hierarchy, comparison, and actions sit in a reporting layout that feels deliberate.</p>
-          </article>
-          <article className="rf-site-command__rail-card">
-            <span>Web app output</span>
-            <strong>Shareable delivery without waiting on a BI program.</strong>
-            <p>Useful when a team needs something shareable and productized faster than a dashboard rebuild.</p>
-          </article>
+        <div className="rf-site-command__issuance">
+          {issuance.map((item) => (
+            <article key={item.label} className="rf-site-command__issuance-card">
+              <span>{item.label}</span>
+              <strong>{item.title}</strong>
+              <p>{item.note}</p>
+            </article>
+          ))}
         </div>
       </div>
     </div>
@@ -530,18 +556,21 @@ function HeroShowcase() {
 function PositioningBand() {
   const items = [
     {
+      index: "01",
       label: "Excel-native",
       title: "Start where the numbers are already trusted.",
       detail:
         "ReportForge begins with the spreadsheet selection instead of forcing a new BI model or a new reporting stack.",
     },
     {
+      index: "02",
       label: "Story planning",
       title: "One reporting brief governs every output.",
       detail:
         "The same planning layer shapes dashboards, decks, Apps Script web apps, and executive summaries.",
     },
     {
+      index: "03",
       label: "Decision-ready",
       title: "The result reads like finished reporting, not stitched exports.",
       detail:
@@ -555,6 +584,7 @@ function PositioningBand() {
         <div className="rf-site-band__grid">
           {items.map((item) => (
             <article key={item.label} className="rf-site-band__item">
+              <b>{item.index}</b>
               <span>{item.label}</span>
               <strong>{item.title}</strong>
               <p>{item.detail}</p>
@@ -608,6 +638,11 @@ function ComparisonGrid() {
 
 function OverviewTabContent() {
   const content = marketingSiteContent;
+  const rail = [
+    "No BI rebuild required to prove value.",
+    "The team keeps working from the spreadsheet it already trusts.",
+    "One brief controls every output before polish begins.",
+  ];
 
   return (
     <>
@@ -620,6 +655,14 @@ function OverviewTabContent() {
                 title={content.workflow.title}
                 summary={content.workflow.summary}
               />
+              <div className="rf-site-sequence__rail">
+                <span>Why this wedge wins</span>
+                <ul>
+                  {rail.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="rf-site-steps">
               {content.workflow.steps.map((step, index) => (
@@ -670,6 +713,11 @@ function OverviewTabContent() {
 
 function ProductTabContent() {
   const content = marketingSiteContent;
+  const outputNotes = [
+    "Dashboard-grade HTML with stronger hierarchy",
+    "Deck narrative shaped before slide export",
+    "Apps Script web delivery for lightweight sharing",
+  ];
 
   return (
     <>
@@ -682,6 +730,11 @@ function ProductTabContent() {
                 title={content.outputs.title}
                 summary="The operating advantage is not one isolated artifact. ReportForge keeps the reporting brief coherent across every delivery channel."
               />
+              <div className="rf-site-operating-matrix__rail">
+                {outputNotes.map((note) => (
+                  <article key={note}>{note}</article>
+                ))}
+              </div>
               <div className="rf-site-output-grid">
                 {content.outputs.items.map((item) => (
                   <article key={item.title} className="rf-site-output-card">
@@ -743,10 +796,16 @@ function BuyersTabContent() {
     <>
       <section className="rf-site-section rf-site-section--muted" id="buyers">
         <div className="rf-site-shell rf-site-shell--narrow">
-          <SectionHeader
-            eyebrow={content.personas.eyebrow}
-            title={content.personas.title}
-          />
+          <div className="rf-site-buyer-intro">
+            <SectionHeader
+              eyebrow={content.personas.eyebrow}
+              title={content.personas.title}
+            />
+            <div className="rf-site-buyer-intro__panel">
+              <span>Buying signal</span>
+              <strong>The sale lands fastest where important reporting still passes through Excel before leadership sees it.</strong>
+            </div>
+          </div>
           <div className="rf-site-persona-grid">
             {content.personas.items.map((persona) => (
               <article key={persona.title} className="rf-site-persona-card">
