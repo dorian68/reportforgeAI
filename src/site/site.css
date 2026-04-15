@@ -4363,7 +4363,7 @@ body::before {
 }
 
 .rf-site-hero__layout {
-  grid-template-columns: minmax(0, 0.84fr) minmax(360px, 1.16fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 42px;
   align-items: start;
 }
@@ -4392,7 +4392,7 @@ body::before {
 
 .rf-site-hero__proof {
   margin-top: 30px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   padding-top: 0;
   border-top: 0;
@@ -4406,8 +4406,8 @@ body::before {
 }
 
 .rf-site-command {
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 18px;
   align-items: start;
   padding: 22px;
   border: 1px solid var(--rf-site-line);
@@ -4451,7 +4451,7 @@ body::before {
 
 .rf-site-command__track {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .rf-site-command__step {
@@ -4543,7 +4543,7 @@ body::before {
 
 .rf-site-output-stage {
   display: grid;
-  grid-template-columns: minmax(320px, 0.38fr) minmax(0, 0.62fr);
+  grid-template-columns: 1fr;
   gap: 28px;
   align-items: start;
 }
@@ -4596,7 +4596,7 @@ body::before {
 
 .rf-site-output-stage__stack {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
@@ -4654,7 +4654,49 @@ body::before {
 }
 
 .rf-site-launch {
-  grid-template-columns: minmax(0, 0.6fr) minmax(320px, 0.4fr);
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 0.4fr);
+}
+
+.rf-site-hero__copy,
+.rf-site-hero__visual,
+.rf-site-command,
+.rf-site-command > *,
+.rf-site-workflow,
+.rf-site-sequence__rail,
+.rf-site-steps article,
+.rf-site-list-panels > *,
+.rf-site-output-stage > *,
+.rf-site-output-stage__stack > *,
+.rf-site-output-card,
+.rf-site-store-card,
+.rf-site-persona-card,
+.rf-site-pricing-card,
+.rf-site-launch > *,
+.rf-site-faq article,
+.rf-site-window,
+.rf-site-window__body {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.rf-site-sequence__intro,
+.rf-site-shift__intro,
+.rf-site-operating-matrix__copy {
+  position: static;
+  top: auto;
+}
+
+.rf-site-window,
+.rf-site-store-card__preview,
+.rf-site-command__shot {
+  overflow: hidden;
+}
+
+.rf-site-command img,
+.rf-site-store-card img,
+.rf-site-window img {
+  max-width: 100%;
+  height: auto;
 }
 
 .rf-site-launch__optional {
