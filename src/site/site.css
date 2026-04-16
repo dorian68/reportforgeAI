@@ -4634,9 +4634,13 @@ body::before {
 }
 
 .rf-site-pricing-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
   gap: 18px;
   border-top: 0;
+  align-items: stretch;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
 }
 
 .rf-site-pricing-card,
@@ -4645,6 +4649,8 @@ body::before {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.025);
   box-shadow: var(--rf-site-shadow);
+  min-width: 0;
+  scroll-snap-align: start;
 }
 
 .rf-site-pricing-card.is-recommended {
@@ -4775,8 +4781,7 @@ body::before {
 
   .rf-site-output-stage__stack,
   .rf-site-hero__proof,
-  .rf-site-persona-grid,
-  .rf-site-pricing-grid {
+  .rf-site-persona-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -4787,7 +4792,6 @@ body::before {
   .rf-site-output-grid,
   .rf-site-output-stage__stack,
   .rf-site-persona-grid,
-  .rf-site-pricing-grid,
   .rf-site-hero__proof {
     grid-template-columns: 1fr;
   }
